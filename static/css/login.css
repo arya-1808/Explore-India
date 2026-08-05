@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:url("../images/tajmahal.jpg") no-repeat center center fixed;
+background-size:cover;
+min-height:100vh;
+}
+
+.navbar{
+background:rgba(0,0,0,.75);
+padding:18px 70px;
+}
+
+.navbar-brand{
+color:white;
+font-size:28px;
+font-weight:700;
+}
+
+.nav-link{
+color:white !important;
+margin-left:20px;
+}
+
+.login-section{
+height:calc(100vh - 70px);
+display:flex;
+align-items:center;
+padding-left:580px;
+padding-right: 540px;
+}
+
+.login-card{
+width:420px;
+background:rgba(255,255,255,.92);
+padding:40px;
+border-radius:20px;
+box-shadow:0 20px 50px rgba(0,0,0,.3);
+
+}
+
+.login-card h1{
+font-weight:700;
+margin-bottom:5px;
+}
+
+.login-card p{
+color:#666;
+margin-bottom:25px;
+}
+
+.form-control{
+height:50px;
+border-radius:10px;
+}
+
+.btn-warning{
+height:50px;
+font-weight:600;
+border-radius:10px;
+font-size: 17px;
+}
+
+a{
+text-decoration:none;
+}
