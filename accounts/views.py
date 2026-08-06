@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
+from django.core.mail import send_mail
+from django.conf import settings
+import random
 
 def user_login(request):
     if request.method == "POST":
@@ -57,20 +60,59 @@ def profile(request):
     return render(request, "users/profile.html")
 
 def forgot_password(request):
+
     if request.method == "POST":
-        username = request.POST.get("username")
-        new_password = request.POST.get("new_password")
 
-        try:
-            user = User.objects.get(username=username)
-            user.set_password(new_password)
-            user.save()
+        # Send OTP
+        if "send_otp" in request.POST:
 
-            messages.success(request, "Password changed successfully.")
-            return redirect("login")
+            email = request.POST.get("email")
 
-        except User.DoesNotExist:
-            messages.error(request, "User does not exist.")
+            try:
+                User.objects.get(email=email)
+
+                otp = str(random.randint(100000, 999999))
+
+                request.session["otp"] = otp
+                request.session["email"] = email
+
+                send_mail(
+                    "Password Reset OTP",
+                    f"Your OTP is: {otp}",
+                    settings.EMAIL_HOST_USER,
+                    [email],
+                    fail_silently=False,
+                )
+
+                messages.success(request, "OTP sent successfully.")
+
+            except User.DoesNotExist:
+                messages.error(request, "Email not registered.")
+
+        # Reset Password
+        elif "reset_password" in request.POST:
+
+            otp = request.POST.get("otp")
+            new_password = request.POST.get("new_password")
+            confirm_password = request.POST.get("confirm_password")
+
+            if otp != request.session.get("otp"):
+                messages.error(request, "Invalid OTP")
+
+            elif new_password != confirm_password:
+                messages.error(request, "Passwords do not match")
+
+            else:
+                email = request.session.get("email")
+
+                user = User.objects.get(email=email)
+                user.set_password(new_password)
+                user.save()
+
+                request.session.flush()
+
+                messages.success(request, "Password changed successfully.")
+                return redirect("login")
 
     return render(request, "users/forgot_password.html")
 

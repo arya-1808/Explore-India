@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'trips',
     'reviews',
     'enquiries',
-    'chat_support',
+    # 'chat_support',
     'dashboard',
 ]
 
