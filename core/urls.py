@@ -8,6 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('destinations/', include('destinations.urls')),
+    path('reviews/', include('reviews.urls')),
+    path('enquiries/', include('enquiries.urls')),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,360 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Explore India | Enquiry</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Enquiry CSS -->
+    <link rel="stylesheet"
+          href="{% static 'css/enquiry.css' %}">
+
+</head>
+
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+
+            <span class="globe">🌍</span>
+
+            <span>
+                Explore <b>India</b>
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="/">Home</a>
+
+            <a href="/destinations/">
+                Destinations
+            </a>
+
+            <a href="/trip-planner/">
+                Trip Planner
+            </a>
+
+            <a href="/enquiries/" class="active">
+                Enquiry
+            </a>
+
+            <a href="/contact/">
+                Contact
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ================= ENQUIRY SECTION ================= -->
+
+    <section class="enquiry-section">
+
+        <div class="overlay"></div>
+
+
+        <div class="enquiry-container">
+
+
+            <!-- ================= LEFT SIDE ================= -->
+
+            <div class="left-content">
+
+                <h1>
+                    We're Here To Help
+                </h1>
+
+
+                <h2>
+                    Explore Incredible India
+                </h2>
+
+
+                <p class="description">
+
+                    Have questions about destinations,
+                    travel packages or bookings?
+                    Our team is always ready to help you.
+
+                </p>
+
+
+                <!-- SUPPORT -->
+
+                <div class="support-item">
+
+                    <div class="icon-box">
+
+                        <i class="fa-solid fa-headphones"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            24/7 Support
+                        </h3>
+
+                        <p>
+                            Always available
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SECURE TRAVEL -->
+
+                <div class="support-item">
+
+                    <div class="icon-box">
+
+                        <i class="fa-solid fa-shield-halved"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            Secure Travel
+                        </h3>
+
+                        <p>
+                            Safe &amp; trusted
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESTINATIONS -->
+
+                <div class="support-item">
+
+                    <div class="icon-box">
+
+                        <i class="fa-solid fa-location-dot"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <h3>
+                            100+ Destinations
+                        </h3>
+
+                        <p>
+                            Across India
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================= RIGHT FORM ================= -->
+
+            <div class="form-card">
+
+                <form method="POST"
+                      action="{% url 'enquiry' %}">
+
+                    {% csrf_token %}
+
+
+                    <!-- NAME + EMAIL -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Full Name
+                            </label>
+
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Enter your full name"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter your email"
+                                required>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- PHONE + ENQUIRY TYPE -->
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Phone
+                            </label>
+
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Enter phone number"
+                                required>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Enquiry Type
+                            </label>
+
+                            <select
+                                name="enquiry_type"
+                                required>
+
+                                <option value="General">
+                                    General
+                                </option>
+
+                                <option value="Destination">
+                                    Destination
+                                </option>
+
+                                <option value="Travel Package">
+                                    Travel Package
+                                </option>
+
+                                <option value="Booking">
+                                    Booking
+                                </option>
+
+                                <option value="Trip Planner">
+                                    Trip Planner
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- SUBJECT -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Subject
+                        </label>
+
+                        <input
+                            type="text"
+                            name="subject"
+                            placeholder="Subject"
+                            required>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="form-group full">
+
+                        <label>
+                            Message
+                        </label>
+
+                        <textarea
+                            name="message"
+                            placeholder="Write your enquiry here..."
+                            required></textarea>
+
+                    </div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="submit-btn">
+
+                        Submit Enquiry
+
+                        <i class="fa-solid fa-paper-plane"></i>
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</body>
+
+</html>
