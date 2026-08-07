@@ -10,6 +10,7 @@ urlpatterns = [
     path('destinations/', include('destinations.urls')),
     path('reviews/', include('reviews.urls')),
     path('enquiries/', include('enquiries.urls')),
+    path('dashboard/', include('dashboard.urls')),
 ]
 
 if settings.DEBUG:
