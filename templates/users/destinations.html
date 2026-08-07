@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Destinations</title>
+</head>
+<body>
+
+<h1>Explore India Destinations</h1>
+
+<form method="get">
+    <input type="text" name="q" placeholder="Search destinations..." value="{{ query }}">
+
+    <select name="category">
+        <option value="">All Categories</option>
+        {% for value, label in categories %}
+            <option value="{{ value }}" {% if value == selected_category %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="state">
+        <option value="">All States</option>
+        {% for value, label in states %}
+            <option value="{{ value }}" {% if value == selected_state %}selected{% endif %}>{{ label }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Search</button>
+</form>
+
+{% for dest in destinations %}
+    <div>
+        <h2>{{ dest.name }}</h2>
+        <p>{{ dest.city }}, {{ dest.get_state_display }}</p>
+        <p>{{ dest.description }}</p>
+        <p>Category: {{ dest.get_category_display }}</p>
+        <p>Budget: ₹{{ dest.avg_budget_per_day }} / day</p>
+        <a href="{% url 'destinations:destination_detail' dest.slug %}">View Details</a>
+    </div>
+{% empty %}
+    <p>No destinations found.</p>
+{% endfor %}
+
+</body>
+</html>

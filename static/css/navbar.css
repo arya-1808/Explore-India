@@ -1,0 +1,55 @@
+.custom-navbar{
+
+    background:#0f172a;
+
+    padding:15px 0;
+
+    transition:.3s;
+
+}
+
+.navbar-brand{
+
+    color:white !important;
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.nav-link{
+
+    color:white !important;
+
+    margin-left:18px;
+
+    font-weight:500;
+
+    transition:.3s;
+
+}
+
+.nav-link:hover{
+
+    color:#ffc107 !important;
+
+}
+
+.nav-link.active{
+
+    color:#ffc107 !important;
+
+}
+
+.btn-warning{
+
+    font-weight:600;
+
+}
+
+.navbar{
+
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}

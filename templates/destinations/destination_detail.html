@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ destination.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/destination_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="detail-hero">
+
+    <img src="{{ destination.image.url }}" alt="{{ destination.name }}">
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+
+        <span>{{ destination.get_category_display }}</span>
+
+        <h1>{{ destination.name }}</h1>
+
+        <p>{{ destination.city }}, {{ destination.state }}</p>
+
+    </div>
+
+</section>
+
+<section class="detail-container">
+
+    <div class="left">
+
+        <h2>About Destination</h2>
+
+        <p>{{ destination.description }}</p>
+
+        <h2>Things To Do</h2>
+
+        <ul>
+            <li>✔ Local Sightseeing</li>
+            <li>✔ Photography</li>
+            <li>✔ Food Exploration</li>
+            <li>✔ Shopping</li>
+            <li>✔ Nature Walk</li>
+        </ul>
+
+    </div>
+
+    <div class="right">
+
+        <div class="info-card">
+
+            <h3>Travel Information</h3>
+
+            <hr>
+
+            <p><strong>Category:</strong> {{ destination.get_category_display }}</p>
+
+            <p><strong>Best Time:</strong> {{ destination.best_time_to_visit }}</p>
+
+            <p><strong>Budget:</strong> ₹{{ destination.avg_budget_per_day }}/day</p>
+
+            <p><strong>State:</strong> {{ destination.state }}</p>
+
+            <a href="#" class="book-btn">Plan Your Trip</a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="related">
+
+    <h2>You May Also Like</h2>
+
+    <div class="cards">
+
+        {% for place in related_destinations %}
+
+        <div class="card">
+
+            <img src="{{ place.image.url }}" alt="">
+
+            <div class="card-body">
+
+                <h4>{{ place.name }}</h4>
+
+                <a href="{% url 'destinations:destination_detail' place.slug %}">
+                    View Details
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p>No related destinations available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

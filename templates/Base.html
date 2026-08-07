@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        Explore India
+        {% endblock %}
+    </title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Base CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+<nav class="main-navbar">
+
+    <div class="logo">
+
+        <img src="{% static 'images/logo.jpeg' %}" alt="logo">
+
+        <h2>Explore India</h2>
+
+    </div>
+
+    <ul>
+
+        <li><a href="/">Home</a></li>
+
+        <li><a href="/destinations/">Destinations</a></li>
+
+        <li><a href="/trip-planner/">Trip Planner</a></li>
+
+        <li><a href="/contact/">Contact</a></li>
+
+    </ul>
+
+    <a href="/accounts/login/" class="login-btn">
+        Login
+    </a>
+
+</nav>
+
+</header>
+
+<!-- ================= CONTENT ================= -->
+
+{% block content %}
+{% endblock %}
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>© 2026 Explore India. All Rights Reserved.</p>
+
+</footer>
+
+{% block extra_js %}
+{% endblock %}
+
+</body>
+</html>

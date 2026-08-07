@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg custom-navbar sticky-top">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold" href="/">
+            🌏 Explore India
+        </a>
+
+        <button class="navbar-toggler bg-light"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarMenu">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'destinations:destination_list' %}">
+                        Destinations
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Trip Planner
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Contact
+                    </a>
+                </li>
+
+                <li class="nav-item ms-lg-3">
+
+                    <a class="btn btn-warning rounded-pill px-4"
+                       href="#">
+
+                        Login
+
+                    </a>
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</nav>
