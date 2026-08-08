@@ -1,0 +1,191 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Trip{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow mx-auto" style="max-width: 800px;">
+
+        <div class="card-header bg-dark text-white">
+            <h3 class="mb-0">Edit Trip ✈️</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <!-- Trip Name -->
+                <div class="mb-3">
+                    <label class="form-label">Trip Name</label>
+
+                    <input
+                        type="text"
+                        name="trip_name"
+                        class="form-control"
+                        value="{{ trip.trip_name }}"
+                        required>
+                </div>
+
+
+                <!-- Destination -->
+                <div class="mb-3">
+                    <label class="form-label">Destination</label>
+
+                    <select
+                        name="destination"
+                        class="form-select"
+                        required>
+
+                        {% for destination in destinations %}
+
+                        <option
+                            value="{{ destination.id }}"
+                            {% if destination.id == trip.destination.id %}
+                                selected
+                            {% endif %}>
+
+                            {{ destination.name }}
+                            - {{ destination.get_state_display }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+
+                <!-- Dates -->
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Start Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="start_date"
+                            class="form-control"
+                            value="{{ trip.start_date|date:'Y-m-d' }}"
+                            required>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            End Date
+                        </label>
+
+                        <input
+                            type="date"
+                            name="end_date"
+                            class="form-control"
+                            value="{{ trip.end_date|date:'Y-m-d' }}"
+                            required>
+
+                    </div>
+
+                </div>
+
+
+                <!-- People -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Number of People
+                    </label>
+
+                    <input
+                        type="number"
+                        name="number_of_people"
+                        class="form-control"
+                        min="1"
+                        value="{{ trip.number_of_people }}"
+                        required>
+
+                </div>
+
+
+                <!-- Budget -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Budget (₹)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="budget"
+                        class="form-control"
+                        min="0"
+                        value="{{ trip.budget }}"
+                        required>
+
+                </div>
+
+
+                <!-- Itinerary -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Itinerary
+                    </label>
+
+                    <textarea
+                        name="itinerary"
+                        class="form-control"
+                        rows="5">{{ trip.itinerary }}</textarea>
+
+                </div>
+
+
+                <!-- Notes -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Additional Notes
+                    </label>
+
+                    <textarea
+                        name="notes"
+                        class="form-control"
+                        rows="4">{{ trip.notes }}</textarea>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <button
+                    type="submit"
+                    class="btn btn-success">
+
+                    Update Trip
+
+                </button>
+
+                <a
+                    href="{% url 'trips:trip_detail' trip.id %}"
+                    class="btn btn-secondary">
+
+                    Cancel
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block title %}My Trips{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <div>
+            <h1>My Trips ✈️</h1>
+            <p class="text-muted">
+                Plan and manage your journeys
+            </p>
+        </div>
+
+        <a href="{% url 'trips:create_trip' %}"
+           class="btn btn-warning">
+            + Create New Trip
+        </a>
+
+    </div>
+
+
+    {% if trips %}
+
+    <div class="row">
+
+        {% for trip in trips %}
+
+        <div class="col-md-6 col-lg-4 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                {% if trip.destination.image %}
+
+                <img src="{{ trip.destination.image.url }}"
+                     class="card-img-top"
+                     style="height:200px; object-fit:cover;">
+
+                {% endif %}
+
+                <div class="card-body">
+
+                    <h4 class="card-title">
+                        {{ trip.trip_name }}
+                    </h4>
+
+                    <p class="text-muted">
+                        📍 {{ trip.destination.name }}
+                    </p>
+
+                    <p>
+                        📅 {{ trip.start_date }}
+                        → {{ trip.end_date }}
+                    </p>
+
+                    <p>
+                        👥 {{ trip.number_of_people }} people
+                    </p>
+
+                    <p>
+                        💰 ₹{{ trip.budget }}
+                    </p>
+
+                   <a href="{% url 'trips:trip_detail' trip.id %}"
+   class="btn btn-dark btn-sm">
+    View Trip
+</a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="text-center py-5">
+
+        <h3>No trips created yet 🗺️</h3>
+
+        <p class="text-muted">
+            Start planning your next adventure!
+        </p>
+
+        <a href="{% url 'trips:create_trip' %}"
+           class="btn btn-warning">
+            Create Your First Trip
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Trip{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow mx-auto" style="max-width: 700px;">
+
+        <div class="card-header bg-dark text-white">
+            <h3 class="mb-0">Create Your Trip ✈️</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Trip Name
+                    </label>
+
+                    <input type="text"
+                           name="trip_name"
+                           class="form-control"
+                           placeholder="Example: Goa Vacation"
+                           required>
+                </div>
+
+
+                <div class="mb-3">
+                    <label class="form-label">
+                        Destination
+                    </label>
+
+                    <select name="destination"
+                            class="form-select"
+                            required>
+
+                        <option value="">
+                            Select Destination
+                        </option>
+
+                        {% for destination in destinations %}
+
+                        <option value="{{ destination.id }}">
+                            {{ destination.name }}
+                            - {{ destination.get_state_display }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            Start Date
+                        </label>
+
+                        <input type="date"
+                               name="start_date"
+                               class="form-control"
+                               required>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label class="form-label">
+                            End Date
+                        </label>
+
+                        <input type="date"
+                               name="end_date"
+                               class="form-control"
+                               required>
+
+                    </div>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Number of People
+                    </label>
+
+                    <input type="number"
+                           name="number_of_people"
+                           class="form-control"
+                           min="1"
+                           value="1"
+                           required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Budget (₹)
+                    </label>
+
+                    <input type="number"
+                           name="budget"
+                           class="form-control"
+                           min="0"
+                           placeholder="Example: 15000"
+                           required>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Itinerary
+                    </label>
+
+                    <textarea name="itinerary"
+                              class="form-control"
+                              rows="4"
+                              placeholder="Day 1 - Visit beach&#10;Day 2 - Explore city"></textarea>
+
+                </div>
+
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Additional Notes
+                    </label>
+
+                    <textarea name="notes"
+                              class="form-control"
+                              rows="3"
+                              placeholder="Any additional travel details..."></textarea>
+
+                </div>
+
+
+                <button type="submit"
+                        class="btn btn-warning">
+                    Create Trip
+                </button>
+
+                <a href="{% url 'trips:trip_list' %}"
+                   class="btn btn-secondary">
+                    Cancel
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

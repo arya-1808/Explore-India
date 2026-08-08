@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ trip.trip_name }}{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="card shadow">
+
+        {% if trip.destination.image %}
+
+        <img src="{{ trip.destination.image.url }}"
+             class="card-img-top"
+             style="height:350px; object-fit:cover;">
+
+        {% endif %}
+
+        <div class="card-body">
+
+            <h1>{{ trip.trip_name }}</h1>
+
+            <p class="text-muted">
+                📍 {{ trip.destination.name }},
+                {{ trip.destination.get_state_display }}
+            </p>
+
+            <hr>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <p>
+                        <strong>Start Date:</strong>
+                        {{ trip.start_date }}
+                    </p>
+
+                    <p>
+                        <strong>End Date:</strong>
+                        {{ trip.end_date }}
+                    </p>
+
+                    <p>
+                        <strong>Travellers:</strong>
+                        {{ trip.number_of_people }}
+                    </p>
+                </div>
+
+                <div class="col-md-6">
+                    <p>
+                        <strong>Budget:</strong>
+                        ₹{{ trip.budget }}
+                    </p>
+
+                    <p>
+                        <strong>Created:</strong>
+                        {{ trip.created_at|date:"d M Y" }}
+                    </p>
+                </div>
+
+            </div>
+
+            <hr>
+
+            <h4>Itinerary 🗺️</h4>
+
+            {% if trip.itinerary %}
+                <p style="white-space: pre-line;">
+                    {{ trip.itinerary }}
+                </p>
+            {% else %}
+                <p class="text-muted">
+                    No itinerary added.
+                </p>
+            {% endif %}
+
+            <h4 class="mt-4">Notes 📝</h4>
+
+            {% if trip.notes %}
+                <p style="white-space: pre-line;">
+                    {{ trip.notes }}
+                </p>
+            {% else %}
+                <p class="text-muted">
+                    No additional notes.
+                </p>
+            {% endif %}
+
+            <hr>
+
+            <a href="{% url 'trips:edit_trip' trip.id %}"
+               class="btn btn-warning">
+                ✏️ Edit Trip
+            </a>
+
+            <a href="{% url 'trips:delete_trip' trip.id %}"
+               class="btn btn-danger">
+                🗑️ Delete Trip
+            </a>
+
+            <a href="{% url 'trips:trip_list' %}"
+               class="btn btn-secondary">
+                ← My Trips
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
