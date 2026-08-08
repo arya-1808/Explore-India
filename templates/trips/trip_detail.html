@@ -1,107 +1,196 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}{{ trip.trip_name }}{% endblock %}
+{% block title %}{{ trip.trip_name }} - Explore India{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/trips.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<div class="container py-5">
+<div class="view-trip-page">
 
-    <div class="card shadow">
+    <!-- Header -->
+
+    <div class="view-trip-header">
+
+        <span class="small-title">
+            ✈️ YOUR JOURNEY
+        </span>
+
+        <h1>Trip Details</h1>
+
+        <p>
+            Your complete travel plan with Explore India.
+        </p>
+
+    </div>
+
+
+    <!-- Main Trip Card -->
+
+    <div class="view-trip-card">
 
         {% if trip.destination.image %}
 
-        <img src="{{ trip.destination.image.url }}"
-             class="card-img-top"
-             style="height:350px; object-fit:cover;">
+        <img
+            src="{{ trip.destination.image.url }}"
+            alt="{{ trip.destination.name }}"
+            class="view-trip-image">
 
         {% endif %}
 
-        <div class="card-body">
 
-            <h1>{{ trip.trip_name }}</h1>
+        <div class="view-trip-content">
 
-            <p class="text-muted">
+            <h2>
+                {{ trip.trip_name }}
+            </h2>
+
+            <p class="destination-name">
                 📍 {{ trip.destination.name }},
-                {{ trip.destination.get_state_display }}
+                {{ trip.destination.state }}
             </p>
 
-            <hr>
 
-            <div class="row">
+            <!-- Trip Information -->
 
-                <div class="col-md-6">
-                    <p>
-                        <strong>Start Date:</strong>
-                        {{ trip.start_date }}
-                    </p>
+            <div class="trip-details-grid">
 
-                    <p>
-                        <strong>End Date:</strong>
-                        {{ trip.end_date }}
-                    </p>
+                <div class="trip-detail-box">
 
-                    <p>
-                        <strong>Travellers:</strong>
-                        {{ trip.number_of_people }}
-                    </p>
+                    <div class="detail-icon">
+                        📅
+                    </div>
+
+                    <strong>Start Date</strong>
+
+                    <span>
+                        {{ trip.start_date|date:"M d, Y" }}
+                    </span>
+
                 </div>
 
-                <div class="col-md-6">
-                    <p>
-                        <strong>Budget:</strong>
-                        ₹{{ trip.budget }}
-                    </p>
 
-                    <p>
-                        <strong>Created:</strong>
-                        {{ trip.created_at|date:"d M Y" }}
-                    </p>
+                <div class="trip-detail-box">
+
+                    <div class="detail-icon">
+                        🏁
+                    </div>
+
+                    <strong>End Date</strong>
+
+                    <span>
+                        {{ trip.end_date|date:"M d, Y" }}
+                    </span>
+
+                </div>
+
+
+                <div class="trip-detail-box">
+
+                    <div class="detail-icon">
+                        👥
+                    </div>
+
+                    <strong>Travellers</strong>
+
+                    <span>
+                        {{ trip.number_of_people }} people
+                    </span>
+
+                </div>
+
+
+                <div class="trip-detail-box">
+
+                    <div class="detail-icon">
+                        💰
+                    </div>
+
+                    <strong>Budget</strong>
+
+                    <span>
+                        ₹{{ trip.budget }}
+                    </span>
+
                 </div>
 
             </div>
 
-            <hr>
 
-            <h4>Itinerary 🗺️</h4>
+            <!-- Itinerary -->
 
-            {% if trip.itinerary %}
-                <p style="white-space: pre-line;">
-                    {{ trip.itinerary }}
+            <div class="trip-section">
+
+                <h3>
+                    🗺️ Itinerary
+                </h3>
+
+                {% if trip.itinerary %}
+
+                <p>{{ trip.itinerary }}</p>
+
+                {% else %}
+
+                <p>
+                    No itinerary added yet.
                 </p>
-            {% else %}
-                <p class="text-muted">
-                    No itinerary added.
-                </p>
-            {% endif %}
 
-            <h4 class="mt-4">Notes 📝</h4>
+                {% endif %}
 
-            {% if trip.notes %}
-                <p style="white-space: pre-line;">
-                    {{ trip.notes }}
-                </p>
-            {% else %}
-                <p class="text-muted">
+            </div>
+
+
+            <!-- Additional Notes -->
+
+            <div class="trip-section">
+
+                <h3>
+                    📝 Notes
+                </h3>
+
+                {% if trip.additional_notes %}
+
+                <p>{{ trip.additional_notes }}</p>
+
+                {% else %}
+
+                <p>
                     No additional notes.
                 </p>
-            {% endif %}
 
-            <hr>
+                {% endif %}
 
-            <a href="{% url 'trips:edit_trip' trip.id %}"
-               class="btn btn-warning">
-                ✏️ Edit Trip
-            </a>
+            </div>
 
-            <a href="{% url 'trips:delete_trip' trip.id %}"
-               class="btn btn-danger">
-                🗑️ Delete Trip
-            </a>
 
-            <a href="{% url 'trips:trip_list' %}"
-               class="btn btn-secondary">
-                ← My Trips
-            </a>
+            <!-- Buttons -->
+
+            <div class="trip-actions">
+
+                <a
+                    href="{% url 'trips:edit_trip' trip.id %}"
+                    class="edit-trip-btn">
+                    ✏️ Edit Trip
+                </a>
+
+
+                <a
+                    href="{% url 'trips:delete_trip' trip.id %}"
+                    class="delete-trip-btn">
+                    🗑️ Delete Trip
+                </a>
+
+
+                <a
+                    href="{% url 'trips:trip_list' %}"
+                    class="back-trips-btn">
+                    ← My Trips
+                </a>
+
+            </div>
 
         </div>
 

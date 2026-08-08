@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Trips{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/trips.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="trips-page">
+
+    <div class="trips-header">
+
+        <div class="trips-title">
+            <h1>My Trips ✈️</h1>
+            <p>Plan and manage your journeys with Explore India.</p>
+        </div>
+
+        <a href="{% url 'trips:create_trip' %}"
+           class="create-trip-btn">
+            + Create New Trip
+        </a>
+
+    </div>
+
+
+    {% if trips %}
+
+    <div class="trip-grid">
+
+        {% for trip in trips %}
+
+        <div class="trip-card">
+
+            {% if trip.destination.image %}
+                <img src="{{ trip.destination.image.url }}"
+                     alt="{{ trip.destination.name }}">
+            {% endif %}
+
+            <div class="trip-info">
+
+                <h3>{{ trip.trip_name }}</h3>
+
+                <p>📍 {{ trip.destination.name }}</p>
+
+                <p>📅 {{ trip.start_date }} → {{ trip.end_date }}</p>
+
+                <p>👥 {{ trip.number_of_people }} people</p>
+
+                <p>💰 ₹{{ trip.budget }}</p>
+
+                <a href="{% url 'trips:trip_detail' trip.id %}"
+                   class="view-trip-btn">
+                    View Trip
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-trips">
+
+        <div class="empty-icon">🗺️</div>
+
+        <h3>No trips created yet</h3>
+
+        <p>
+            Start planning your next adventure!
+        </p>
+
+        <a href="{% url 'trips:create_trip' %}"
+           class="first-trip-btn">
+            Create Your First Trip →
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

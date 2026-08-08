@@ -1,0 +1,1306 @@
+/* ========================================
+   HERO SECTION
+======================================== */
+
+.hero {
+    position: relative;
+    height: 90vh;
+    min-height: 600px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.hero-video {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.48);
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 900px;
+
+    text-align: center;
+    color: white;
+
+    padding: 30px;
+}
+
+
+.hero-tag {
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    border: 1px solid rgba(255,255,255,0.7);
+
+    border-radius: 30px;
+
+    margin-bottom: 25px;
+
+    font-size: 15px;
+}
+
+
+.hero-content h1 {
+    font-size: 70px;
+    line-height: 1.05;
+
+    margin: 0 0 25px;
+
+    font-weight: 800;
+}
+
+
+.hero-content h1 span {
+    color: #ffc107;
+}
+
+
+.hero-content p {
+    max-width: 700px;
+
+    margin: 0 auto 35px;
+
+    font-size: 18px;
+
+    line-height: 1.7;
+}
+
+
+.hero-buttons {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+}
+
+
+.explore-btn,
+.plan-btn {
+
+    padding: 15px 30px;
+
+    border-radius: 30px;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.explore-btn {
+    background: #ffc107;
+    color: #111;
+}
+
+
+.plan-btn {
+    border: 2px solid white;
+    color: white;
+}
+
+
+.explore-btn:hover,
+.plan-btn:hover {
+    transform: translateY(-3px);
+}
+
+
+.scroll-down {
+    position: absolute;
+
+    z-index: 2;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+.scroll-down div {
+    font-size: 25px;
+}
+
+
+
+/* ========================================
+   SEARCH SECTION
+======================================== */
+
+.search-section {
+
+    padding: 80px 8%;
+
+    text-align: center;
+
+    background: #f7f8fa;
+}
+
+
+.section-heading h2 {
+
+    font-size: 42px;
+
+    color: #071d49;
+
+    margin-bottom: 10px;
+}
+
+
+.section-heading p {
+
+    font-size: 18px;
+
+    color: #666;
+
+    margin-bottom: 35px;
+}
+
+
+.search-box {
+
+    width: 70%;
+
+    max-width: 850px;
+
+    margin: auto;
+
+    background: white;
+
+    padding: 8px;
+
+    border-radius: 50px;
+
+    display: flex;
+
+    align-items: center;
+
+    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+}
+
+
+.search-icon {
+
+    font-size: 20px;
+
+    margin-left: 18px;
+}
+
+
+.search-box input {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    padding: 16px;
+
+    font-size: 16px;
+}
+
+
+.search-box button {
+
+    border: none;
+
+    background: #ffc107;
+
+    padding: 14px 30px;
+
+    border-radius: 40px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+
+.search-box button:hover {
+
+    background: #ffb300;
+
+}
+
+
+
+/* ========================================
+   SECTION TITLE
+======================================== */
+
+.section-title {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+}
+
+
+.section-title span {
+
+    color: #f0a500;
+
+    font-weight: 600;
+}
+
+
+.section-title h2 {
+
+    font-size: 42px;
+
+    color: #071d49;
+
+    margin: 12px 0;
+}
+
+
+.section-title p {
+
+    color: #666;
+
+    font-size: 17px;
+}
+
+
+
+/* ========================================
+   SEARCH RESULTS
+======================================== */
+
+.search-results {
+
+    padding: 70px 8%;
+
+    background: #f7f8fa;
+}
+
+
+
+/* ========================================
+   POPULAR DESTINATIONS
+======================================== */
+
+.popular-section {
+
+    padding: 80px 8%;
+
+    background: white;
+}
+
+
+
+/* ========================================
+   DESTINATION GRID
+======================================== */
+
+.destination-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 30px;
+
+    max-width: 1200px;
+
+    margin: auto;
+}
+
+
+
+/* ========================================
+   DESTINATION CARD
+======================================== */
+
+.destination-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.10);
+
+    transition: 0.3s;
+
+}
+
+
+.destination-card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 18px 40px rgba(0,0,0,0.15);
+}
+
+
+.destination-card img {
+
+    width: 100%;
+
+    height: 230px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+.destination-info {
+
+    padding: 22px;
+}
+
+
+.destination-info h3 {
+
+    color: #071d49;
+
+    font-size: 23px;
+
+    margin-bottom: 10px;
+}
+
+
+.destination-info p {
+
+    color: #666;
+
+    margin-bottom: 15px;
+}
+
+
+.category {
+
+    display: inline-block;
+
+    padding: 6px 13px;
+
+    background: #fff3cd;
+
+    color: #946c00;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.view-btn {
+
+    display: block;
+
+    margin-top: 18px;
+
+    color: #071d49;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+
+.view-btn:hover {
+
+    color: #f0a500;
+}
+
+
+
+/* ========================================
+   NO IMAGE
+======================================== */
+
+.no-image {
+
+    height: 230px;
+
+    background: #e9ecef;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #777;
+}
+
+
+
+/* ========================================
+   NO RESULTS
+======================================== */
+
+.no-results {
+
+    grid-column: 1 / -1;
+
+    text-align: center;
+
+    padding: 50px;
+
+    color: #666;
+}
+
+
+
+/* ========================================
+   TRIP CTA
+======================================== */
+
+.trip-cta {
+
+    margin: 80px 8%;
+
+    padding: 70px 40px;
+
+    border-radius: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #071d49,
+            #163d72
+        );
+
+    text-align: center;
+
+    color: white;
+}
+
+
+.trip-content span {
+
+    color: #ffc107;
+
+    font-weight: 600;
+
+    font-size: 18px;
+}
+
+
+.trip-content h2 {
+
+    font-size: 42px;
+
+    margin: 15px 0;
+}
+
+
+.trip-content p {
+
+    max-width: 650px;
+
+    margin: 0 auto 30px;
+
+    line-height: 1.7;
+
+    color: #e5e5e5;
+}
+
+
+.trip-btn {
+
+    display: inline-block;
+
+    padding: 14px 30px;
+
+    background: #ffc107;
+
+    color: #111;
+
+    text-decoration: none;
+
+    border-radius: 30px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.trip-btn:hover {
+
+    transform: translateY(-3px);
+
+    background: #ffb300;
+}
+
+
+
+/* ========================================
+   RESPONSIVE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .hero-content h1 {
+        font-size: 50px;
+    }
+
+    .destination-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .search-box {
+        width: 90%;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .hero {
+        min-height: 650px;
+    }
+
+    .hero-content h1 {
+        font-size: 38px;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+    .search-section {
+        padding: 60px 5%;
+    }
+
+    .section-heading h2,
+    .section-title h2 {
+        font-size: 30px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box button {
+        padding: 12px 20px;
+    }
+
+    .destination-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trip-cta {
+        margin: 50px 5%;
+        padding: 50px 25px;
+    }
+
+    .trip-content h2 {
+        font-size: 30px;
+    }
+
+}
+
+/* =========================
+   EXPLORE BY CATEGORY
+========================= */
+
+.category-section {
+    padding: 90px 8%;
+    background: #ffffff;
+}
+
+.category-section .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.category-section .section-title span {
+    color: #f5a800;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.category-section .section-title h2 {
+    color: #071d49;
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.category-section .section-title p {
+    color: #666;
+    font-size: 17px;
+}
+
+.category-grid {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.category-card {
+    display: block;
+
+    text-decoration: none;
+    color: #071d49;
+
+    background: #f8f9fb;
+
+    padding: 35px 25px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    border: 1px solid #eeeeee;
+
+    transition: all 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+
+    background: white;
+}
+
+.category-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.category-card h3 {
+    color: #071d49;
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.category-card p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-section {
+        padding: 60px 5%;
+    }
+
+}
+
+/* =========================
+   FEATURED EXPERIENCES
+========================= */
+
+.featured-section {
+    padding: 90px 8%;
+    background: #f7f8fa;
+}
+
+.featured-section .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.featured-section .section-title span {
+    color: #f5a800;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.featured-section .section-title h2 {
+    color: #071d49;
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.featured-section .section-title p {
+    color: #666;
+    font-size: 17px;
+}
+
+
+/* GRID */
+
+.featured-grid {
+    max-width: 1150px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+
+/* CARD */
+
+.featured-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+    transition: all 0.3s ease;
+}
+
+.featured-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+/* =========================
+   FEATURED IMAGE
+========================= */
+
+.featured-image {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+
+    transition: transform 0.5s ease;
+}
+
+.featured-card:hover .featured-image img {
+    transform: scale(1.06);
+}
+
+
+
+
+
+
+/* INFO */
+
+.featured-info {
+    padding: 25px;
+}
+
+.experience-tag {
+    display: inline-block;
+
+    background: #fff3cd;
+    color: #b77900;
+
+    padding: 6px 12px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.featured-info h3 {
+    color: #071d49;
+
+    font-size: 24px;
+
+    margin: 12px 0 8px;
+}
+
+.featured-info p {
+    color: #666;
+
+    font-size: 15px;
+
+    line-height: 1.6;
+
+    margin-bottom: 18px;
+}
+
+.featured-info a {
+    color: #071d49;
+
+    text-decoration: none;
+
+    font-weight: 600;
+}
+
+.featured-info a:hover {
+    color: #f5a800;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-section {
+        padding: 60px 5%;
+    }
+
+    .featured-section .section-title h2 {
+        font-size: 32px;
+    }
+
+}
+
+
+/* =========================
+   WHY EXPLORE INDIA
+========================= */
+
+.why-section {
+    padding: 90px 8%;
+    background: #ffffff;
+}
+
+.why-section .section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.why-section .section-title span {
+    color: #f5a800;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.why-section .section-title h2 {
+    color: #071d49;
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.why-section .section-title p {
+    color: #666;
+    font-size: 17px;
+}
+
+
+/* WHY GRID */
+
+.why-grid {
+    max-width: 1100px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+
+/* CARD */
+
+.why-card {
+    text-align: center;
+
+    padding: 35px 22px;
+
+    background: #f8f9fb;
+
+    border-radius: 20px;
+
+    border: 1px solid #eeeeee;
+
+    transition: all 0.3s ease;
+}
+
+.why-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.10);
+
+    background: #ffffff;
+}
+
+
+/* ICON */
+
+.why-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff3cd;
+
+    border-radius: 50%;
+
+    font-size: 32px;
+}
+
+
+/* TEXT */
+
+.why-card h3 {
+    color: #071d49;
+
+    font-size: 19px;
+
+    margin-bottom: 12px;
+}
+
+.why-card p {
+    color: #666;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    margin: 0;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    .why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .why-section {
+        padding: 60px 5%;
+    }
+
+}
+
+/* =====================================================
+   PREMIUM HOME PAGE BACKGROUNDS
+===================================================== */
+
+body {
+    background: #f8f7f3;
+}
+
+
+/* =========================
+   SEARCH SECTION
+========================= */
+
+.search-section {
+    position: relative;
+    padding: 90px 8% 80px;
+    text-align: center;
+    background:
+        radial-gradient(
+            circle at 10% 20%,
+            rgba(255, 193, 7, 0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(7, 29, 73, 0.07),
+            transparent 35%
+        ),
+        #f8f7f3;
+
+    overflow: hidden;
+}
+
+.search-section::before {
+    content: "✈";
+    position: absolute;
+    right: 8%;
+    top: 25px;
+    font-size: 55px;
+    opacity: 0.035;
+    transform: rotate(-15deg);
+}
+
+.search-section h2 {
+    color: #071d49;
+    font-size: 40px;
+    font-weight: 700;
+}
+
+.search-section p {
+    color: #6b7280;
+}
+
+
+/* =========================
+   SEARCH RESULTS
+========================= */
+
+.search-results {
+    padding: 75px 8%;
+    background: #ffffff;
+}
+
+
+/* =========================
+   POPULAR DESTINATIONS
+========================= */
+
+.popular-section {
+    position: relative;
+    padding: 90px 8%;
+    background: #eef3f8;
+}
+
+.popular-section::after {
+    content: "";
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    right: -120px;
+    top: 50px;
+    border-radius: 50%;
+    background: rgba(255, 193, 7, 0.06);
+    filter: blur(20px);
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title span {
+    color: #c79600;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.section-title h2 {
+    color: #071d49;
+    font-size: 38px;
+    margin: 8px 0;
+}
+
+.section-title p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+
+/* =========================
+   DESTINATION CARDS
+========================= */
+
+.destination-card {
+    background: rgba(255,255,255,0.95);
+    border: 1px solid rgba(7,29,73,0.06);
+    border-radius: 18px;
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(7,29,73,0.07);
+
+    transition:
+        transform 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+.destination-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 20px 45px rgba(7,29,73,0.13);
+}
+
+.destination-card img {
+    transition: transform 0.5s ease;
+}
+
+.destination-card:hover img {
+    transform: scale(1.04);
+}
+
+.destination-info {
+    padding: 22px;
+}
+
+.destination-info h3 {
+    color: #071d49;
+}
+
+
+/* =========================
+   EXPLORE BY CATEGORY
+========================= */
+
+.category-section {
+    position: relative;
+    padding: 100px 8%;
+
+    background: #e5edf5;
+
+    overflow: hidden;
+}
+
+
+/* subtle decorative circles */
+
+.category-section::before {
+    content: "";
+    position: absolute;
+    width: 420px;
+    height: 420px;
+    border: 1px solid rgba(7,29,73,0.05);
+    border-radius: 50%;
+    left: -200px;
+    top: 80px;
+}
+
+.category-section::after {
+    content: "";
+    position: absolute;
+    width: 260px;
+    height: 260px;
+    border: 1px solid rgba(199,150,0,0.08);
+    border-radius: 50%;
+    right: -100px;
+    bottom: 50px;
+}
+
+
+/* =========================
+   CATEGORY CARDS
+========================= */
+
+.category-grid {
+    position: relative;
+    z-index: 2;
+}
+
+.category-card {
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: blur(8px);
+
+    border: 1px solid rgba(255,255,255,0.8);
+
+    box-shadow:
+        0 12px 30px rgba(7,29,73,0.06);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 18px 40px rgba(7,29,73,0.12);
+}
+
+.category-icon {
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+    transform: scale(1.1);
+}
+
+
+/* =========================
+   PREMIUM SECTION DIVIDER
+========================= */
+
+.section-divider {
+    width: 70px;
+    height: 3px;
+    margin: 18px auto;
+    background: #d4a514;
+    border-radius: 10px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .search-section,
+    .popular-section,
+    .category-section {
+        padding: 65px 5%;
+    }
+
+    .search-section h2,
+    .section-title h2 {
+        font-size: 30px;
+    }
+
+}
+

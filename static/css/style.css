@@ -1,0 +1,136 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #111;
+}
+
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 75px;
+    width: 100%;
+    background: #071d49;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    position: relative;
+    z-index: 1000;
+}
+
+
+/* LOGO */
+
+.logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.logo span {
+    color: #ffc107;
+}
+
+
+/* NAV LINKS */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.nav-links a:hover {
+    color: #ffc107;
+}
+
+
+/* RIGHT SIDE */
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.welcome-user {
+    color: white;
+}
+
+.login-btn,
+.logout-btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 600;
+}
+
+.login-btn {
+    background: #ffc107;
+    color: #111;
+}
+
+.logout-btn {
+    background: #dc3545;
+    color: white;
+}
+
+
+/* FOOTER */
+
+.footer {
+    background: #071d49;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.footer h3 {
+    color: #ffc107;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    margin: 8px 0;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+        gap: 20px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .nav-right {
+        justify-content: center;
+    }
+}

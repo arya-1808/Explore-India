@@ -1,14 +1,715 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Home</title>
-</head>
-<body>
-    <h1>Welcome {{ request.user.username }}</h1>
-    <p>Login Successful!</p>
-    <a href="{% url 'logout'%}"> Logout </a>
-    <br>
-    <a href="{% url 'profile'%}"> Profile </a>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block title %}Explore India{% endblock %}
+
+{% block extra_css %}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+
+<style>
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+}
+
+.hero-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    top: 0;
+    left: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+}
+
+.hero-tag {
+    border: 1px solid white;
+    padding: 10px 22px;
+    border-radius: 30px;
+    margin-bottom: 25px;
+}
+
+.hero-content h1 {
+    font-size: 65px;
+    line-height: 1.05;
+    margin: 0;
+    font-weight: 800;
+}
+
+.hero-content h1 span {
+    color: #ffc107;
+}
+
+.hero-content p {
+    max-width: 750px;
+    font-size: 18px;
+    margin: 25px 0;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.explore-btn,
+.plan-btn {
+    padding: 15px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.explore-btn {
+    background: #ffc107;
+    color: #111;
+}
+
+.plan-btn {
+    border: 2px solid white;
+    color: white;
+}
+
+.search-section {
+    padding: 70px 8%;
+    text-align: center;
+    background: #f7f8fa;
+}
+
+.search-section h2 {
+    font-size: 42px;
+    color: #071d49;
+    margin-bottom: 10px;
+}
+
+.search-section p {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    width: 70%;
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 8px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+}
+
+.search-box span {
+    font-size: 20px;
+    margin-left: 18px;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 16px;
+}
+
+.search-box button {
+    border: none;
+    background: #ffc107;
+    padding: 14px 30px;
+    border-radius: 40px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.popular-section {
+    padding: 70px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title span {
+    color: #f5a900;
+    font-weight: 600;
+}
+
+.section-title h2 {
+    font-size: 42px;
+    color: #071d49;
+    margin: 10px 0;
+}
+
+.section-title p {
+    color: #666;
+}
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.destination-card {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.10);
+    transition: 0.3s;
+}
+
+.destination-card:hover {
+    transform: translateY(-8px);
+}
+
+.destination-card img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.destination-info {
+    padding: 20px;
+}
+
+.destination-info h3 {
+    color: #071d49;
+}
+
+.destination-info p {
+    color: #666;
+}
+
+.category {
+    display: inline-block;
+    background: #fff3cd;
+    color: #a66a00;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+}
+
+@media (max-width: 768px) {
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .search-box {
+        width: 95%;
+    }
+
+    .destination-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+}
+
+</style>
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline>
+
+        <source
+            src="{% static 'videos/india-travel.mp4' %}"
+            type="video/mp4">
+
+        Your browser does not support the video tag.
+
+    </video>
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <span class="hero-tag">
+            🇮🇳 Discover Incredible India
+        </span>
+
+        <h1>
+            Explore India.
+            <br>
+            <span>Experience the Extraordinary.</span>
+        </h1>
+
+        <p>
+            Discover breathtaking destinations, rich culture,
+            beautiful landscapes and unforgettable experiences.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="{% url 'destinations:destination_list' %}"
+               class="explore-btn">
+                Explore Destinations
+            </a>
+
+            <a href="{% url 'trips:trip_list' %}"
+               class="plan-btn">
+                Plan Your Trip
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= SEARCH ================= -->
+
+<section class="search-section">
+
+    <h2>Where do you want to go?</h2>
+
+    <p>
+        Search and discover amazing destinations across India.
+    </p>
+
+    <form method="GET"
+          action="{% url 'user_home' %}"
+          class="search-box">
+
+        <span>🔍</span>
+
+        <input
+            type="text"
+            name="q"
+            placeholder="Search destination, city..."
+            value="{{ query }}"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+</section>
+
+
+<!-- ================= SEARCH RESULTS ================= -->
+
+{% if query %}
+
+<section class="popular-section">
+
+    <div class="section-title">
+
+        <span>🔎 Search</span>
+
+        <h2>
+            Search Results for "{{ query }}"
+        </h2>
+
+    </div>
+
+    <div class="destination-grid">
+
+        {% for destination in search_results %}
+
+        <div class="destination-card">
+
+            {% if destination.image %}
+
+            <img
+                src="{{ destination.image.url }}"
+                alt="{{ destination.name }}">
+
+            {% endif %}
+
+            <div class="destination-info">
+
+                <h3>{{ destination.name }}</h3>
+
+                <p>📍 {{ destination.state }}</p>
+
+                <span class="category">
+                    {{ destination.get_category_display }}
+                </span>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p>
+            No destination found for "{{ query }}".
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endif %}
+
+
+<!-- ================= POPULAR ================= -->
+
+<section class="popular-section">
+
+    <section class="popular-section">
+
+    <div class="section-title">
+
+        <span>✨ Explore</span>
+
+        <h2>Popular Destinations</h2>
+
+        <p>
+            Discover some of India's most amazing places.
+        </p>
+
+    </div>
+
+    <div class="destination-grid">
+
+        {% for destination in popular_destinations %}
+
+        <div class="destination-card">
+
+            {% if destination.image %}
+
+            <img
+                src="{{ destination.image.url }}"
+                alt="{{ destination.name }}">
+
+            {% endif %}
+
+            <div class="destination-info">
+
+                <h3>{{ destination.name }}</h3>
+
+                <p>📍 {{ destination.state }}</p>
+
+                <span class="category">
+                    {{ destination.get_category_display }}
+                </span>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <p>No destinations available.</p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<!-- =========================
+     EXPLORE BY CATEGORY
+========================= -->
+
+<section class="category-section">
+
+    <section class="category-section">
+
+    <div class="section-title">
+
+        <span>✨ Discover</span>
+
+        <h2>Explore by Category</h2>
+
+        <p>
+            Find the perfect experience for your next journey.
+        </p>
+
+    </div>
+  
+    <div class="category-grid">
+
+        <a href="{% url 'destinations:destination_list' %}?category=Hill Station"
+           class="category-card">
+            <div class="category-icon">🏔️</div>
+            <h3>Hill Stations</h3>
+            <p>Explore beautiful mountains and peaceful valleys.</p>
+        </a>
+
+        <a href="{% url 'destinations:destination_list' %}?category=Heritage"
+           class="category-card">
+            <div class="category-icon">🏛️</div>
+            <h3>Heritage</h3>
+            <p>Discover India's historic forts and monuments.</p>
+        </a>
+
+        <a href="{% url 'destinations:destination_list' %}?category=Beach"
+           class="category-card">
+            <div class="category-icon">🏖️</div>
+            <h3>Beaches</h3>
+            <p>Relax beside India's beautiful coastal destinations.</p>
+        </a>
+
+        <a href="{% url 'destinations:destination_list' %}?category=Waterfall"
+           class="category-card">
+            <div class="category-icon">💦</div>
+            <h3>Waterfalls</h3>
+            <p>Experience breathtaking waterfalls and nature.</p>
+        </a>
+
+        <a href="{% url 'destinations:destination_list' %}?category=Nature"
+           class="category-card">
+            <div class="category-icon">🌿</div>
+            <h3>Nature</h3>
+            <p>Enjoy forests, greenery and peaceful landscapes.</p>
+        </a>
+
+        <a href="{% url 'destinations:destination_list' %}"
+           class="category-card">
+            <div class="category-icon">🧭</div>
+            <h3>Explore All</h3>
+            <p>Discover all amazing destinations across India.</p>
+        </a>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     FEATURED EXPERIENCES
+========================= -->
+
+<section class="featured-section">
+
+    <div class="section-title">
+        <span>✨ Experiences</span>
+        <h2>Featured Experiences</h2>
+        <p>Make your journey unforgettable with unique experiences across India.</p>
+    </div>
+
+    <div class="featured-grid">
+
+        <!-- Mountain -->
+        <div class="featured-card">
+            <div class="featured-image">
+    <img src="{% static 'images/mountain.jpg' %}"
+         alt="Mountain Escape">
+</div>
+
+            <div class="featured-info">
+                <span class="experience-tag">Adventure</span>
+                <h3>Mountain Escapes</h3>
+                <p>
+                    Discover peaceful valleys, snowy mountains
+                    and breathtaking hill stations.
+                </p>
+                <a href="{% url 'destinations:destination_list' %}">
+                    Explore Mountains →
+                </a>
+            </div>
+        </div>
+
+
+        <!-- Beach -->
+        <div class="featured-card">
+           <div class="featured-image">
+    <img src="{% static 'images/beach.jpg' %}"
+         alt="Beach Getaway">
+</div>
+
+            <div class="featured-info">
+                <span class="experience-tag">Relaxation</span>
+                <h3>Beach Getaways</h3>
+                <p>
+                    Enjoy sunny beaches, beautiful coastlines
+                    and peaceful seaside moments.
+                </p>
+                <a href="{% url 'destinations:destination_list' %}">
+                    Explore Beaches →
+                </a>
+            </div>
+        </div>
+
+
+        <!-- Heritage -->
+        <div class="featured-card">
+            <div class="featured-image">
+    <img src="{% static 'images/heritage.jpg' %}"
+         alt="Heritage and Culture">
+</div>
+
+            <div class="featured-info">
+                <span class="experience-tag">Culture</span>
+                <h3>Heritage & Culture</h3>
+                <p>
+                    Step into India's rich history, forts,
+                    palaces and cultural traditions.
+                </p>
+                <a href="{% url 'destinations:destination_list' %}">
+                    Explore Heritage →
+                </a>
+            </div>
+        </div>
+
+
+        <!-- Nature -->
+        <div class="featured-card">
+            <div class="featured-image">
+    <img src="{% static 'images/nature.jpg' %}"
+         alt="Nature and Wildlife">
+</div>
+
+            <div class="featured-info">
+                <span class="experience-tag">Nature</span>
+                <h3>Nature & Wildlife</h3>
+                <p>
+                    Experience forests, waterfalls, wildlife
+                    and India's beautiful natural landscapes.
+                </p>
+                <a href="{% url 'destinations:destination_list' %}">
+                    Explore Nature →
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =========================
+     WHY EXPLORE INDIA
+========================= -->
+
+<section class="why-section">
+
+    <div class="section-title">
+
+        <span>❤️ Why Us</span>
+
+        <h2>Why Explore India?</h2>
+
+        <p>
+            Everything you need to discover India's incredible destinations.
+        </p>
+
+    </div>
+
+
+    <div class="why-grid">
+
+        <!-- Card 1 -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                🧭
+            </div>
+
+            <h3>Easy Trip Planning</h3>
+
+            <p>
+                Plan your journey easily with destinations,
+                itineraries and useful travel information.
+            </p>
+
+        </div>
+
+
+        <!-- Card 2 -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                📍
+            </div>
+
+            <h3>Curated Destinations</h3>
+
+            <p>
+                Discover carefully selected destinations
+                from different parts of incredible India.
+            </p>
+
+        </div>
+
+
+        <!-- Card 3 -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                ⭐
+            </div>
+
+            <h3>Amazing Experiences</h3>
+
+            <p>
+                Find mountains, beaches, heritage sites,
+                nature and unforgettable experiences.
+            </p>
+
+        </div>
+
+
+        <!-- Card 4 -->
+
+        <div class="why-card">
+
+            <div class="why-icon">
+                🇮🇳
+            </div>
+
+            <h3>Discover Incredible India</h3>
+
+            <p>
+                Explore India's rich culture, history,
+                landscapes and beautiful traditions.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+
+

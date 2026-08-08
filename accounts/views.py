@@ -41,13 +41,33 @@ def register(request):
 
     return render(request, "users/register.html")
 
+from destinations.models import Destination
+
 
 def user_home(request):
-    return render(request, "users/home.html")
+
+    query = request.GET.get("q", "")
+
+    destinations = Destination.objects.all()
+
+    if query:
+        destinations = destinations.filter(
+            name__icontains=query
+        )
+
+    return render(
+        request,
+        "users/home.html",
+        {
+            "popular_destinations": destinations[:6],
+            "search_results": destinations,
+            "query": query,
+        }
+    )
 
 def user_logout(request):
     logout(request)
-    return redirect("login")
+    return redirect("user_home")
 
 
 @login_required

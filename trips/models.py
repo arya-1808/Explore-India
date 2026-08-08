@@ -36,6 +36,8 @@ class Trip(models.Model):
         blank=True
     )
 
+    additional_notes = models.TextField(blank=True)
+
     created_at = models.DateTimeField(
         auto_now_add=True
     )

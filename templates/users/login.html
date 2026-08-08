@@ -14,6 +14,14 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
+
+    {% if messages %}
+    {% for message in messages %}
+        <div class="login-message">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
         <a class="navbar-brand" href="#">🌍 Explore India</a>
 
         <ul class="navbar-nav ms-auto">

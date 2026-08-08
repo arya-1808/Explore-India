@@ -1,22 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}My Trips{% endblock %}
+{% block title %}My Trips | Explore India{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/trips.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<div class="container py-5">
+<section class="trips-page">
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
+    <!-- Page Header -->
+    <div class="trips-header">
 
         <div>
-            <h1>My Trips ✈️</h1>
-            <p class="text-muted">
-                Plan and manage your journeys
+            <span class="trips-tag">✈️ Your Journey</span>
+
+            <h1>My Trips</h1>
+
+            <p>
+                Plan and manage your journeys with Explore India.
             </p>
         </div>
 
-        <a href="{% url 'trips:create_trip' %}"
-           class="btn btn-warning">
+        <a href="{% url 'trips:create_trip' %}" class="create-trip-btn">
             + Create New Trip
         </a>
 
@@ -25,35 +33,48 @@
 
     {% if trips %}
 
-    <div class="row">
+    <!-- Trip Cards -->
+
+    <div class="trips-grid">
 
         {% for trip in trips %}
 
-        <div class="col-md-6 col-lg-4 mb-4">
+        <div class="trip-card">
 
-            <div class="card shadow-sm h-100">
+            {% if trip.destination.image %}
 
-                {% if trip.destination.image %}
+            <div class="trip-image">
 
-                <img src="{{ trip.destination.image.url }}"
-                     class="card-img-top"
-                     style="height:200px; object-fit:cover;">
+                <img
+                    src="{{ trip.destination.image.url }}"
+                    alt="{{ trip.destination.name }}">
 
-                {% endif %}
+            </div>
 
-                <div class="card-body">
+            {% else %}
 
-                    <h4 class="card-title">
-                        {{ trip.trip_name }}
-                    </h4>
+            <div class="trip-image trip-placeholder">
+                🗺️
+            </div>
 
-                    <p class="text-muted">
-                        📍 {{ trip.destination.name }}
-                    </p>
+            {% endif %}
+
+
+            <div class="trip-content">
+
+                <h2>{{ trip.trip_name }}</h2>
+
+                <p class="trip-destination">
+                    📍 {{ trip.destination.name }}
+                </p>
+
+                <div class="trip-info">
 
                     <p>
-                        📅 {{ trip.start_date }}
-                        → {{ trip.end_date }}
+                        📅
+                        <strong>{{ trip.start_date }}</strong>
+                        →
+                        <strong>{{ trip.end_date }}</strong>
                     </p>
 
                     <p>
@@ -64,12 +85,16 @@
                         💰 ₹{{ trip.budget }}
                     </p>
 
-                   <a href="{% url 'trips:trip_detail' trip.id %}"
-   class="btn btn-dark btn-sm">
-    View Trip
-</a>
-
                 </div>
+
+
+                <a
+                    href="{% url 'trips:trip_detail' trip.id %}"
+                    class="view-trip-btn">
+
+                    View Trip →
+
+                </a>
 
             </div>
 
@@ -79,25 +104,35 @@
 
     </div>
 
+
     {% else %}
 
-    <div class="text-center py-5">
+    <!-- Empty State -->
 
-        <h3>No trips created yet 🗺️</h3>
+    <div class="empty-trips">
 
-        <p class="text-muted">
+        <div class="empty-icon">
+            🗺️
+        </div>
+
+        <h2>No trips created yet</h2>
+
+        <p>
             Start planning your next adventure!
         </p>
 
-        <a href="{% url 'trips:create_trip' %}"
-           class="btn btn-warning">
-            Create Your First Trip
+        <a
+            href="{% url 'trips:create_trip' %}"
+            class="create-first-btn">
+
+            Create Your First Trip →
+
         </a>
 
     </div>
 
     {% endif %}
 
-</div>
+</section>
 
 {% endblock %}

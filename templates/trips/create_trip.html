@@ -1,167 +1,207 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Create Trip{% endblock %}
+{% block title %}Plan Your Trip{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/trips.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<div class="container py-5">
+<div class="create-trip-page">
 
-    <div class="card shadow mx-auto" style="max-width: 700px;">
+    <div class="create-trip-header">
 
-        <div class="card-header bg-dark text-white">
-            <h3 class="mb-0">Create Your Trip ✈️</h3>
-        </div>
+        <span>✈️ PLAN YOUR JOURNEY</span>
 
-        <div class="card-body">
+        <h1>Plan Your Trip</h1>
 
-            <form method="POST">
+        <p>
+            Create your perfect itinerary and start exploring India.
+        </p>
 
-                {% csrf_token %}
-
-                <div class="mb-3">
-                    <label class="form-label">
-                        Trip Name
-                    </label>
-
-                    <input type="text"
-                           name="trip_name"
-                           class="form-control"
-                           placeholder="Example: Goa Vacation"
-                           required>
-                </div>
+    </div>
 
 
-                <div class="mb-3">
-                    <label class="form-label">
-                        Destination
-                    </label>
+    <div class="trip-form-card">
 
-                    <select name="destination"
-                            class="form-select"
-                            required>
+        <form method="POST" class="trip-form">
 
-                        <option value="">
-                            Select Destination
-                        </option>
-
-                        {% for destination in destinations %}
-
-                        <option value="{{ destination.id }}">
-                            {{ destination.name }}
-                            - {{ destination.get_state_display }}
-                        </option>
-
-                        {% endfor %}
-
-                    </select>
-                </div>
+            {% csrf_token %}
 
 
-                <div class="row">
+            <!-- Trip Name -->
 
-                    <div class="col-md-6 mb-3">
+            <div class="form-group">
 
-                        <label class="form-label">
-                            Start Date
-                        </label>
+                <label for="trip_name">
+                    Trip Name
+                </label>
 
-                        <input type="date"
-                               name="start_date"
-                               class="form-control"
-                               required>
+                <input
+                    type="text"
+                    id="trip_name"
+                    name="trip_name"
+                    placeholder="Example: Goa Vacation"
+                    required>
 
-                    </div>
-
-
-                    <div class="col-md-6 mb-3">
-
-                        <label class="form-label">
-                            End Date
-                        </label>
-
-                        <input type="date"
-                               name="end_date"
-                               class="form-control"
-                               required>
-
-                    </div>
-
-                </div>
+            </div>
 
 
-                <div class="mb-3">
+            <!-- Destination -->
 
-                    <label class="form-label">
-                        Number of People
-                    </label>
+            <div class="form-group">
 
-                    <input type="number"
-                           name="number_of_people"
-                           class="form-control"
-                           min="1"
-                           value="1"
-                           required>
+                <label for="destination">
+                    Destination
+                </label>
 
-                </div>
+                <select
+                    id="destination"
+                    name="destination"
+                    required>
 
+                    <option value="">
+                        Select Destination
+                    </option>
 
-                <div class="mb-3">
+                    {% for destination in destinations %}
 
-                    <label class="form-label">
-                        Budget (₹)
-                    </label>
+                    <option value="{{ destination.id }}">
+                        {{ destination.name }}
+                    </option>
 
-                    <input type="number"
-                           name="budget"
-                           class="form-control"
-                           min="0"
-                           placeholder="Example: 15000"
-                           required>
+                    {% endfor %}
 
-                </div>
+                </select>
+
+            </div>
 
 
-                <div class="mb-3">
+            <!-- Start Date -->
 
-                    <label class="form-label">
-                        Itinerary
-                    </label>
+            <div class="form-group">
 
-                    <textarea name="itinerary"
-                              class="form-control"
-                              rows="4"
-                              placeholder="Day 1 - Visit beach&#10;Day 2 - Explore city"></textarea>
+                <label for="start_date">
+                    Start Date
+                </label>
 
-                </div>
+                <input
+                    type="date"
+                    id="start_date"
+                    name="start_date"
+                    required>
 
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-                        Additional Notes
-                    </label>
-
-                    <textarea name="notes"
-                              class="form-control"
-                              rows="3"
-                              placeholder="Any additional travel details..."></textarea>
-
-                </div>
+            </div>
 
 
-                <button type="submit"
-                        class="btn btn-warning">
+            <!-- End Date -->
+
+            <div class="form-group">
+
+                <label for="end_date">
+                    End Date
+                </label>
+
+                <input
+                    type="date"
+                    id="end_date"
+                    name="end_date"
+                    required>
+
+            </div>
+
+
+            <!-- Number of People -->
+
+            <div class="form-group">
+
+                <label for="number_of_people">
+                    Number of People
+                </label>
+
+                <input
+                    type="number"
+                    id="number_of_people"
+                    name="number_of_people"
+                    value="1"
+                    min="1"
+                    required>
+
+            </div>
+
+
+            <!-- Budget -->
+
+            <div class="form-group">
+
+                <label for="budget">
+                    Budget (₹)
+                </label>
+
+                <input
+                    type="number"
+                    id="budget"
+                    name="budget"
+                    placeholder="Example: 15000"
+                    min="0"
+                    required>
+
+            </div>
+
+
+            <!-- Itinerary -->
+
+            <div class="form-group full-width">
+
+                <label for="itinerary">
+                    Itinerary
+                </label>
+
+                <textarea
+                    id="itinerary"
+                    name="itinerary"
+                    placeholder="Day 1 - Visit beach&#10;Day 2 - Explore city"></textarea>
+
+            </div>
+
+
+            <!-- Additional Notes -->
+
+            <div class="form-group full-width">
+
+                <label for="additional_notes">
+                    Additional Notes
+                </label>
+
+                <textarea
+                    id="additional_notes"
+                    name="additional_notes"
+                    placeholder="Any additional travel details..."></textarea>
+
+            </div>
+
+
+            <!-- Buttons -->
+
+            <div class="form-buttons">
+
+                <button
+                    type="submit"
+                    class="create-btn">
                     Create Trip
                 </button>
 
-                <a href="{% url 'trips:trip_list' %}"
-                   class="btn btn-secondary">
+                <a
+                    href="{% url 'trips:trip_list' %}"
+                    class="cancel-btn">
                     Cancel
                 </a>
 
-            </form>
+            </div>
 
-        </div>
+        </form>
 
     </div>
 

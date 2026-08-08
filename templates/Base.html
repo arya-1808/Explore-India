@@ -1,83 +1,105 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>
-        {% block title %}
-        Explore India
-        {% endblock %}
-    </title>
+    <title>{% block title %}Explore India{% endblock %}</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- Base CSS -->
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     {% block extra_css %}
     {% endblock %}
-
 </head>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
+    <!-- ================= NAVBAR ================= -->
 
-<header>
+    <header class="navbar">
 
-<nav class="main-navbar">
+        <div class="logo">
+            <a href="{% url 'user_home' %}">
+                Explore <span>India</span>
+            </a>
+        </div>
 
-    <div class="logo">
+        <nav class="nav-links">
 
-        <img src="{% static 'images/logo.jpeg' %}" alt="logo">
+            <a href="{% url 'user_home' %}">
+                Home
+            </a>
 
-        <h2>Explore India</h2>
+            <a href="{% url 'destinations:destination_list' %}">
+                Destinations
+            </a>
 
-    </div>
+            <a href="{% url 'trips:trip_list' %}">
+                Trip Planner
+            </a>
 
-    <ul>
+            <a href="#">
+                Contact
+            </a>
 
-        <li><a href="/">Home</a></li>
+        </nav>
 
-        <li><a href="/destinations/">Destinations</a></li>
+        <div class="nav-right">
 
-        <li><a href="/trip-planner/">Trip Planner</a></li>
+            {% if user.is_authenticated %}
 
-        <li><a href="/contact/">Contact</a></li>
+                <span class="welcome-user">
+                    Hi, {{ user.username }} 👋
+                </span>
 
-    </ul>
+                <a href="{% url 'profile' %}" class="login-btn">
+                    Profile
+                </a>
 
-    <a href="/accounts/login/" class="login-btn">
-        Login
-    </a>
+                <a href="{% url 'logout' %}" class="logout-btn">
+                    Logout
+                </a>
 
-</nav>
+            {% else %}
 
-</header>
+                <a href="{% url 'login' %}" class="login-btn">
+                    Login
+                </a>
 
-<!-- ================= CONTENT ================= -->
+            {% endif %}
 
-{% block content %}
-{% endblock %}
+        </div>
 
-<!-- ================= FOOTER ================= -->
+    </header>
 
-<footer>
 
-    <p>© 2026 Explore India. All Rights Reserved.</p>
+    <!-- ================= PAGE CONTENT ================= -->
 
-</footer>
+    {% block content %}
+    {% endblock %}
 
-{% block extra_js %}
-{% endblock %}
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <h3>Explore India</h3>
+
+        <p>
+            Discover breathtaking destinations,
+            culture and unforgettable experiences.
+        </p>
+
+        <p>© 2026 Explore India</p>
+
+    </footer>
 
 </body>
 </html>
