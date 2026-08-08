@@ -9,7 +9,9 @@ from django.conf import settings
 import random
 
 def user_login(request):
+  
     if request.method == "POST":
+       
         username = request.POST["username"]
         password = request.POST["password"]
 
@@ -58,29 +60,51 @@ def profile(request):
         request.user.save()   # Save changes to the database
 
     return render(request, "users/profile.html")
+@login_required
+def edit_profile(request):
+    user = request.user
+
+    if request.method == "POST":
+        user.first_name = request.POST.get("first_name", "").strip()
+        user.last_name = request.POST.get("last_name", "").strip()
+
+        # Username and email can be displayed but not changed here
+        user.save()
+
+        messages.success(request, "Profile updated successfully!")
+        return redirect("profile")
+
+    return render(request, "users/edit_profile.html")
+
 
 def forgot_password(request):
+    print("view called")
 
     if request.method == "POST":
 
-        # Send OTP
-        if "send_otp" in request.POST:
+        # SEND OTP
+        if request.POST.get("send_otp"):
+            print("post request received")
 
             email = request.POST.get("email")
 
+            print("EMAIL =", email)
+
             try:
-                User.objects.get(email=email)
+                user = User.objects.get(email=email)
 
-                otp = str(random.randint(100000, 999999))
+                otp = random.randint(100000, 999999)
 
-                request.session["otp"] = otp
-                request.session["email"] = email
+                request.session["reset_email"] = email
+                request.session["reset_otp"] = str(otp)
+
+                print("OTP =", otp)
 
                 send_mail(
-                    "Password Reset OTP",
-                    f"Your OTP is: {otp}",
-                    settings.EMAIL_HOST_USER,
-                    [email],
+                    subject="Password Reset OTP",
+                    message=f"Your OTP is {otp}",
+                    from_email=None,
+                    recipient_list=[email],
                     fail_silently=False,
                 )
 
@@ -89,54 +113,95 @@ def forgot_password(request):
             except User.DoesNotExist:
                 messages.error(request, "Email not registered.")
 
-        # Reset Password
-        elif "reset_password" in request.POST:
+            except Exception as e:
+                print(e)
+                messages.error(request, str(e))
+
+            return render(
+                request,
+                "users/forgot_password.html",
+                {"email": email},
+            )
+
+        # VERIFY OTP
+        elif request.POST.get("verify_otp"):
 
             otp = request.POST.get("otp")
+
+            if otp == request.session.get("reset_otp"):
+                return redirect("change_password")
+
+            else:
+                messages.error(request, "Invalid OTP")
+
+            return render(
+                request,
+                "users/forgot_password.html",
+                {
+                    "email": request.session.get("reset_email")
+                },
+            )
+
+    return render(request, "users/forgot_password.html")
+                
+
+    
+
+
+def change_password(request):
+
+    # Forgot Password Flow
+    if "reset_email" in request.session:
+
+        email = request.session["reset_email"]
+        user = User.objects.get(email=email)
+
+        if request.method == "POST":
+
             new_password = request.POST.get("new_password")
             confirm_password = request.POST.get("confirm_password")
 
-            if otp != request.session.get("otp"):
-                messages.error(request, "Invalid OTP")
-
-            elif new_password != confirm_password:
-                messages.error(request, "Passwords do not match")
+            if new_password != confirm_password:
+                messages.error(request, "Passwords do not match.")
 
             else:
-                email = request.session.get("email")
-
-                user = User.objects.get(email=email)
                 user.set_password(new_password)
                 user.save()
 
-                request.session.flush()
+                del request.session["reset_email"]
+                del request.session["reset_otp"]
 
                 messages.success(request, "Password changed successfully.")
                 return redirect("login")
 
-    return render(request, "users/forgot_password.html")
+        return render(request, "users/change_password.html")
 
-
-def change_password(request):
-    if request.method == "POST":
-        old_password = request.POST.get("old_password")
-        new_password = request.POST.get("new_password")
-        confirm_password = request.POST.get("confirm_password")
+    # Normal Change Password
+    else:
 
         user = request.user
 
-        if not user.check_password(old_password):
-            messages.error(request, "Old password is incorrect.")
+        if request.method == "POST":
 
-        elif new_password != confirm_password:
-            messages.error(request, "Passwords do not match.")
+            old_password = request.POST.get("old_password")
+            new_password = request.POST.get("new_password")
+            confirm_password = request.POST.get("confirm_password")
 
-        else:
-            user.set_password(new_password)
-            user.save()
-            update_session_auth_hash(request, user)
+            if not user.check_password(old_password):
+                messages.error(request, "Old password is incorrect.")
 
-            messages.success(request, "Password changed successfully.")
-            return redirect("profile")
+            elif new_password != confirm_password:
+                messages.error(request, "Passwords do not match.")
 
-    return render(request, "users/change_password.html")
+            else:
+                user.set_password(new_password)
+                user.save()
+
+                update_session_auth_hash(request, user)
+
+                messages.success(request, "Password changed successfully.")
+                return redirect("profile")
+
+        return render(request, "users/change_password.html")
+
+    
