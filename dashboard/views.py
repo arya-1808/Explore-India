@@ -5,16 +5,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 
 def dashboard(request):
+    #search functionality for recent destinations
     search = request.GET.get("search")
     recent_destinations = Destination.objects.order_by("-created_at")
     if search:
         recent_destinations = recent_destinations.filter(
         name__icontains=search
     )
-        recent_destinations = recent_destinations[:5]
-
-        
-
+    recent_destinations = recent_destinations[:5]
+    
+#dashboard statistics
     total_destinations = Destination.objects.count()
 
     featured_destinations = Destination.objects.filter(
