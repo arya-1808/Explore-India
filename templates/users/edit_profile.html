@@ -1,0 +1,212 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile | Explore India</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="{% static 'css/profile.css' %}">
+
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <a href="{% url 'user_home' %}" class="logo">
+        Explore <span>India</span>
+    </a>
+
+    <div class="nav-links">
+
+        <a href="{% url 'user_home' %}">Home</a>
+
+        <a href="#">Destinations</a>
+        <a href="#">Trip Planner</a>
+        <a href="#">Reviews</a>
+        <a href="#">Contact</a>
+
+        <a href="{% url 'profile' %}">
+            <i class="fa-regular fa-user"></i>
+            Profile
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- BREADCRUMB -->
+
+<div class="breadcrumb">
+
+    <a href="{% url 'user_home' %}">Home</a>
+
+    <span>›</span>
+
+    <a href="{% url 'profile' %}">Profile</a>
+
+    <span>›</span>
+
+    <strong>Edit Profile</strong>
+
+</div>
+
+
+<!-- EDIT PROFILE -->
+
+<section class="edit-container">
+
+    <div class="edit-card">
+
+        <h1>Edit Profile</h1>
+
+        <p class="subtitle">
+            Update your personal information
+        </p>
+
+
+        {% if messages %}
+
+            {% for message in messages %}
+
+                <div class="message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            <!-- FIRST NAME -->
+
+            <label>First Name</label>
+
+            <input
+                type="text"
+                name="first_name"
+                value="{{ user.first_name }}"
+                placeholder="Enter first name"
+            >
+
+
+            <!-- LAST NAME -->
+
+            <label>Last Name</label>
+
+            <input
+                type="text"
+                name="last_name"
+                value="{{ user.last_name }}"
+                placeholder="Enter last name"
+            >
+
+
+            <!-- USERNAME -->
+
+            <label>Username</label>
+
+            <input
+                type="text"
+                value="{{ user.username }}"
+                disabled
+            >
+
+
+            <!-- EMAIL -->
+
+            <label>Email Address</label>
+
+            <input
+                type="email"
+                value="{{ user.email }}"
+                disabled
+            >
+
+
+            <button type="submit" class="save-button">
+
+                <i class="fa-solid fa-check"></i>
+
+                Save Changes
+
+            </button>
+
+
+            <a href="{% url 'profile' %}" class="cancel-button">
+                Cancel
+            </a>
+
+        </form>
+
+    </div>
+
+
+    <!-- PROFILE PREVIEW -->
+
+    <div class="preview-card">
+
+        <h2>Profile Preview</h2>
+
+        <div class="preview-image">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+        <h3>
+            {{ user.first_name }} {{ user.last_name }}
+        </h3>
+
+        <p>
+            @{{ user.username }}
+        </p>
+
+        <p>
+            <i class="fa-solid fa-envelope"></i>
+            {{ user.email }}
+        </p>
+
+        <p>
+            <i class="fa-solid fa-calendar"></i>
+            Member since {{ user.date_joined|date:"F Y" }}
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 Explore India
+    </p>
+
+</footer>
+
+</body>
+
+</html>
