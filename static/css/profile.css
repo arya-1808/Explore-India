@@ -1,0 +1,754 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    /* ===== PAGE BACKGROUND ===== */
+    background: linear-gradient(
+        135deg,
+        #fff8ef 0%,
+        #f5f7ff 50%,
+        #eef7f2 100%
+    );
+
+    color: #222;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    height: 70px;
+    background: #050505;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: white;
+    text-decoration: none;
+
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #ff9800;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ff9800;
+}
+
+.nav-links .active {
+    color: #ff9800;
+}
+
+.nav-links .logout {
+    color: #ff9800;
+}
+
+
+/* =========================================================
+   PROFILE HEADER
+========================================================= */
+
+.profile-header {
+    height: 240px;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+        ),
+        url("../images/india-bg.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+}
+
+.profile-overlay {
+    text-align: center;
+}
+
+.profile-overlay h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+.profile-overlay p {
+    font-size: 17px;
+}
+
+
+/* =========================================================
+   PROFILE CONTAINER
+========================================================= */
+
+.profile-container {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: -55px auto 60px;
+
+    display: grid;
+    grid-template-columns: 300px 1fr;
+
+    gap: 30px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   PROFILE CARD
+========================================================= */
+
+.profile-card {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.profile-image {
+    width: 110px;
+    height: 110px;
+
+    margin: -80px auto 20px;
+
+    border-radius: 50%;
+
+    background: #eee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 5px solid white;
+
+    font-size: 45px;
+    color: #555;
+}
+
+.profile-card h2 {
+    font-size: 22px;
+    margin-bottom: 5px;
+}
+
+.username {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.user-info {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.user-info p {
+    margin: 15px 0;
+
+    color: #555;
+
+    font-size: 14px;
+}
+
+.user-info i {
+    width: 22px;
+    color: #ff9800;
+}
+
+
+/* =========================================================
+   EDIT BUTTON
+========================================================= */
+
+.edit-button {
+    display: block;
+
+    background: #050505;
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 8px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.edit-button:hover {
+    background: #ff9800;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   ACCOUNT SECTION
+========================================================= */
+
+.account-section {
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.account-section h2 {
+    margin-bottom: 20px;
+}
+
+.account-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.account-card {
+    background: white;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 12px;
+
+    padding: 25px;
+
+    text-decoration: none;
+
+    color: #222;
+
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.12);
+
+    border-color: #ff9800;
+}
+
+.account-card .icon {
+    font-size: 30px;
+
+    color: #3157a6;
+
+    margin-bottom: 15px;
+}
+
+.account-card h3 {
+    margin-bottom: 8px;
+}
+
+.account-card p {
+    color: #777;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   LOGOUT CARD
+========================================================= */
+
+.logout-card {
+    border-color: #ffb0b0;
+}
+
+.logout-card .icon {
+    color: #e53935;
+}
+
+
+/* =========================================================
+   BREADCRUMB
+========================================================= */
+
+.breadcrumb {
+    width: 90%;
+    max-width: 1200px;
+
+    margin: 30px auto;
+
+    color: #777;
+
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: #555;
+
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    color: #ff9800;
+}
+
+.breadcrumb span {
+    margin: 0 10px;
+}
+
+.breadcrumb strong {
+    color: #ff9800;
+}
+
+
+/* =========================================================
+   EDIT PROFILE
+========================================================= */
+
+.edit-container {
+    width: 90%;
+    max-width: 1100px;
+
+    margin: 40px auto 80px;
+
+    display: grid;
+
+    grid-template-columns: 1.5fr 1fr;
+
+    gap: 30px;
+}
+
+.edit-card,
+.preview-card {
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.edit-card h1 {
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #777;
+
+    margin-bottom: 30px;
+}
+
+.edit-card label {
+    display: block;
+
+    margin-top: 18px;
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.edit-card input {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 7px;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.3s;
+}
+
+.edit-card input:focus {
+    border-color: #ff9800;
+
+    box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.12);
+}
+
+.edit-card input:disabled {
+    background: #eee;
+
+    color: #777;
+}
+
+
+/* =========================================================
+   SAVE BUTTON
+========================================================= */
+
+.save-button {
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #ff9800;
+
+    color: white;
+
+    font-weight: bold;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.save-button:hover {
+    background: #e68900;
+
+    transform: translateY(-2px);
+}
+
+.cancel-button {
+    display: block;
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    color: #555;
+
+    text-decoration: none;
+}
+
+.cancel-button:hover {
+    color: #ff9800;
+}
+
+
+/* =========================================================
+   PROFILE PREVIEW
+========================================================= */
+
+.preview-card {
+    text-align: center;
+}
+
+.preview-card h2 {
+    margin-bottom: 25px;
+}
+
+.preview-image {
+    width: 100px;
+    height: 100px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    background: #eee;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 40px;
+
+    color: #555;
+}
+
+.preview-card h3 {
+    margin-top: 20px;
+}
+
+.preview-card p {
+    margin-top: 12px;
+
+    color: #777;
+}
+
+
+/* =========================================================
+   PASSWORD SECTION
+========================================================= */
+
+.password-container {
+    width: 90%;
+    max-width: 900px;
+
+    margin: 60px auto 100px;
+
+    display: grid;
+
+    grid-template-columns: 1.5fr 1fr;
+
+    gap: 30px;
+
+    align-items: start;
+}
+
+.password-card {
+    background: white;
+
+    padding: 35px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+.password-icon {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 50%;
+
+    background: #fff2df;
+
+    color: #ff9800;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-bottom: 20px;
+}
+
+.password-card h1 {
+    margin-bottom: 8px;
+}
+
+.password-card > p {
+    color: #777;
+
+    margin-bottom: 25px;
+}
+
+.password-card label {
+    display: block;
+
+    margin-top: 18px;
+    margin-bottom: 7px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+}
+
+.password-card input {
+    width: 100%;
+
+    padding: 13px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 7px;
+
+    outline: none;
+}
+
+.password-card input:focus {
+    border-color: #ff9800;
+}
+
+
+/* =========================================================
+   PASSWORD RULES
+========================================================= */
+
+.password-rules {
+    background: #eef6ff;
+
+    padding: 25px;
+
+    border-radius: 12px;
+
+    border: 1px solid #c8ddf5;
+}
+
+.password-rules h3 {
+    margin-bottom: 15px;
+}
+
+.password-rules p {
+    margin: 12px 0;
+
+    color: #555;
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.message {
+    background: #e8f7ed;
+
+    color: #176b35;
+
+    padding: 12px;
+
+    border-radius: 7px;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    background: #050505;
+
+    color: #aaa;
+
+    text-align: center;
+
+    padding: 25px;
+
+    margin-top: 50px;
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .nav-links {
+        gap: 12px;
+    }
+
+    .profile-container {
+        grid-template-columns: 1fr;
+    }
+
+    .account-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .edit-container,
+    .password-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        height: auto;
+
+        padding: 18px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+
+        justify-content: center;
+    }
+
+    .profile-overlay h1 {
+        font-size: 30px;
+    }
+
+    .profile-overlay p {
+        font-size: 14px;
+    }
+
+    .profile-container {
+        width: 94%;
+    }
+
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .edit-container,
+    .password-container {
+        width: 94%;
+    }
+
+    .edit-card,
+    .preview-card,
+    .password-card,
+    .account-section {
+        padding: 25px;
+    }
+}
