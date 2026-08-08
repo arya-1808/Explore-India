@@ -1,35 +1,245 @@
+{% load static %}
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Edit Profile</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | Explore India</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
 </head>
+
 <body>
 
-<h2>My Profile</h2>
+<!-- ================= NAVBAR ================= -->
 
-<form method="POST">
-    {% csrf_token %}
+<nav class="navbar">
 
-    <label>Username:</label><br>
-    <input type="text" name="username" value="{{ request.user.username }}"><br><br>
+    <a href="{% url 'user_home' %}" class="logo">
+        Explore <span>India</span>
+    </a>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" value="{{ request.user.email }}"><br><br>
+    <div class="nav-links">
 
-    <label>First Name:</label><br>
-    <input type="text" name="first_name" value="{{ request.user.first_name }}"><br><br>
+        <a href="{% url 'user_home' %}">Home</a>
 
-    <label>Last Name:</label><br>
-    <input type="text" name="last_name" value="{{ request.user.last_name }}"><br><br>
+        <!-- Add these later when you create the views -->
+        <a href="#">Destinations</a>
+        <a href="#">Trip Planner</a>
+        <a href="#">Reviews</a>
+        <a href="#">Contact</a>
 
-    <button type="submit">Edit Profile</button>
+        <a href="{% url 'profile' %}" class="active">
+            <i class="fa-regular fa-user"></i>
+            Profile
+        </a>
 
-</form>
+        <a href="{% url 'logout' %}" class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+        </a>
 
-<br>
+    </div>
 
-<a href="{% url 'user_home' %}">Home</a> |
-<a href="{% url 'logout' %}">Logout</a>|
-<a href="{% url 'change_password' %}">Change password</a>
+</nav>
+
+
+<!-- ================= PROFILE HEADER ================= -->
+
+<section class="profile-header">
+
+    <div class="profile-overlay">
+
+        <h1>My Profile</h1>
+
+        <p>
+            Manage your Explore India account and travel preferences.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PROFILE CONTENT ================= -->
+
+<section class="profile-container">
+
+    <!-- LEFT PROFILE CARD -->
+
+    <div class="profile-card">
+
+        <div class="profile-image">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+        <h2>
+            {{ user.first_name }} {{ user.last_name }}
+        </h2>
+
+        <p class="username">
+            @{{ user.username }}
+        </p>
+
+        <div class="user-info">
+
+            <p>
+                <i class="fa-solid fa-envelope"></i>
+                {{ user.email }}
+            </p>
+
+            <p>
+                <i class="fa-solid fa-calendar"></i>
+                Member since {{ user.date_joined|date:"F Y" }}
+            </p>
+
+        </div>
+
+        <a href="{% url 'edit_profile' %}" class="edit-button">
+
+            <i class="fa-solid fa-pen"></i>
+
+            Edit Profile
+
+        </a>
+
+    </div>
+
+
+    <!-- RIGHT ACCOUNT OPTIONS -->
+
+    <div class="account-section">
+
+        <h2>Account</h2>
+
+        <div class="account-grid">
+
+
+            <!-- EDIT PROFILE -->
+
+            <a href="{% url 'edit_profile' %}" class="account-card">
+
+                <div class="icon">
+                    <i class="fa-solid fa-user-pen"></i>
+                </div>
+
+                <h3>Edit Profile</h3>
+
+                <p>
+                    Update your personal information
+                </p>
+
+            </a>
+
+
+            <!-- CHANGE PASSWORD -->
+
+            <a href="{% url 'change_password' %}" class="account-card">
+
+                <div class="icon">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <h3>Change Password</h3>
+
+                <p>
+                    Update your account password
+                </p>
+
+            </a>
+
+
+            <!-- MY TRIPS -->
+
+            <a href="#" class="account-card">
+
+                <div class="icon">
+                    <i class="fa-solid fa-suitcase-rolling"></i>
+                </div>
+
+                <h3>My Trips</h3>
+
+                <p>
+                    View your planned itineraries
+                </p>
+
+            </a>
+
+
+            <!-- INQUIRIES -->
+
+            <a href="#" class="account-card">
+
+                <div class="icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+
+                <h3>My Inquiries</h3>
+
+                <p>
+                    Check your travel inquiries
+                </p>
+
+            </a>
+
+
+            <!-- REVIEWS -->
+
+            <a href="#" class="account-card">
+
+                <div class="icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <h3>My Reviews</h3>
+
+                <p>
+                    View and manage your reviews
+                </p>
+
+            </a>
+
+
+            <!-- LOGOUT -->
+
+            <a href="{% url 'logout' %}"
+               class="account-card logout-card">
+
+                <div class="icon">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </div>
+
+                <h3>Logout</h3>
+
+                <p>
+                    Sign out from your account
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Explore India. Discover India, your way.
+    </p>
+
+</footer>
+
 </body>
 </html>
