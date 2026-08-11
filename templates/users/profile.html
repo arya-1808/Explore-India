@@ -29,10 +29,20 @@
         <a href="{% url 'user_home' %}">Home</a>
 
         <!-- Add these later when you create the views -->
-        <a href="#">Destinations</a>
-        <a href="#">Trip Planner</a>
-        <a href="#">Reviews</a>
-        <a href="#">Contact</a>
+       <a href="{% url 'destinations:destination_list' %}">
+    Destinations
+</a>
+
+<a href="{% url 'trips:trip_list' %}">
+    Trip Planner
+</a>
+
+<a href="{% url 'reviews:user_reviews' %}">
+    Reviews
+</a>
+          <a href="{% url 'chat_support:chat' %}">
+                AI chat
+            </a>
 
         <a href="{% url 'profile' %}" class="active">
             <i class="fa-regular fa-user"></i>
@@ -173,18 +183,18 @@
             </a>
 
 
-            <!-- INQUIRIES -->
+            <!-- ENQUIRIES -->
 
-            <a href="#" class="account-card">
+            <a href="{% url 'enquiry' %}" class="account-card">
 
                 <div class="icon">
                     <i class="fa-solid fa-comments"></i>
                 </div>
 
-                <h3>My Inquiries</h3>
+                <h3>My Enquiries</h3>
 
                 <p>
-                    Check your travel inquiries
+                    Check your travel enquiries
                 </p>
 
             </a>
@@ -192,7 +202,7 @@
 
             <!-- REVIEWS -->
 
-            <a href="#" class="account-card">
+            <a href="{% url 'reviews:user_reviews' %}" class="account-card">
 
                 <div class="icon">
                     <i class="fa-solid fa-star"></i>

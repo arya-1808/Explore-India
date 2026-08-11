@@ -1,0 +1,473 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Explore India | Reviews</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/review/user_reviews.css' %}">
+
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+
+        <span>🌍</span>
+
+        Explore <b>India</b>
+
+    </div>
+
+
+    <nav>
+
+        <a href="#">Home</a>
+
+        <a href="#">Destinations</a>
+
+        <a href="#">Trip Planner</a>
+
+        <a href="#">Enquiry</a>
+
+        <a href="{% url 'reviews:user_reviews' %}"
+           class="active">
+
+            Reviews
+
+        </a>
+
+        <a href="#">Contact</a>
+
+        <span class="profile-icon">
+            👤
+        </span>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Traveler Reviews
+        </h1>
+
+        <h3>
+            Real experiences. Trusted by explorers.
+        </h3>
+
+        <p>
+            Read genuine reviews from travelers who
+            <br>
+            explored India with us.
+        </p>
+
+    </div>
+
+
+    <div class="share-card">
+
+        <h2>
+            Share Your Experience
+        </h2>
+
+        <p>
+            Loved your trip? Tell others about it!
+        </p>
+
+        <a href="{% url 'reviews:add_review' %}"
+           class="write-btn">
+
+            ✎ &nbsp; Write a Review
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     RATING SUMMARY
+========================= -->
+
+<section class="summary">
+
+    <!-- OVERALL RATING -->
+
+    <div class="overall-rating">
+
+        <h1>
+            {{ average_rating }}
+        </h1>
+
+        <div class="stars">
+            ★★★★★
+        </div>
+
+        <strong>
+            Excellent
+        </strong>
+
+        <small>
+            Based on {{ total_reviews }} reviews
+        </small>
+
+    </div>
+
+
+    <!-- RATING BARS -->
+
+    <div class="rating-bars">
+
+        {% for star, count in rating_counts.items %}
+
+        <div class="rating-row">
+
+            <span>
+                {{ star }} Stars
+            </span>
+
+            <div class="bar">
+
+                {% if total_reviews %}
+
+                <div class="bar-fill"
+                     style="width:
+                     {% widthratio count total_reviews 100 %}%">
+                </div>
+
+                {% endif %}
+
+            </div>
+
+            <span>
+                {{ count }}
+            </span>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- TRUST -->
+
+    <div class="trust-section">
+
+        <div class="trust-item">
+
+            <span>🛡️</span>
+
+            <div>
+                <strong>
+                    Trusted Reviews
+                </strong>
+
+                <small>
+                    Genuine feedback
+                    <br>
+                    from travelers
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <span>☆</span>
+
+            <div>
+                <strong>
+                    Helpful Insights
+                </strong>
+
+                <small>
+                    Make better
+                    <br>
+                    travel decisions
+                </small>
+            </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+            <span>♡</span>
+
+            <div>
+                <strong>
+                    Share & Inspire
+                </strong>
+
+                <small>
+                    Help other
+                    <br>
+                    explorers
+                </small>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REVIEWS SECTION
+========================= -->
+
+<main class="reviews-section">
+
+
+    <!-- FILTER -->
+
+    <aside class="filter-card">
+
+        <h2>
+            Filter Reviews
+        </h2>
+
+
+        <form method="GET">
+
+
+            <label>
+                Rating
+            </label>
+
+            <select name="rating">
+
+                <option value="">
+                    All Ratings
+                </option>
+
+                <option value="5">
+                    5 Stars
+                </option>
+
+                <option value="4">
+                    4 Stars
+                </option>
+
+                <option value="3">
+                    3 Stars
+                </option>
+
+                <option value="2">
+                    2 Stars
+                </option>
+
+                <option value="1">
+                    1 Star
+                </option>
+
+            </select>
+
+
+            <label>
+                Destination
+            </label>
+
+            <select name="destination">
+
+                <option value="">
+                    All Destinations
+                </option>
+
+                {% for destination in destinations %}
+
+                <option value="{{ destination.id }}">
+
+                    {{ destination.name }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <label>
+                Travel Type
+            </label>
+
+            <select name="travel_type">
+
+                <option value="">
+                    All Types
+                </option>
+
+                {% for value, label in travel_types %}
+
+                <option value="{{ value }}">
+
+                    {{ label }}
+
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+
+            <button type="submit"
+                    class="filter-btn">
+
+                Apply Filters
+
+            </button>
+
+        </form>
+
+    </aside>
+
+
+    <!-- REVIEW LIST -->
+
+    <section class="review-list">
+
+        {% for review in reviews %}
+
+        <article class="review-card">
+
+
+            <div class="review-user">
+
+                <div class="avatar">
+
+                    {{ review.user.username|first|upper }}
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        {{ review.user.username }}
+                    </h3>
+
+                    <small>
+                        Traveler
+                    </small>
+
+
+                    <div class="review-stars">
+
+                        {% for i in "12345" %}
+
+                            {% if forloop.counter <= review.rating %}
+
+                                ★
+
+                            {% else %}
+
+                                ☆
+
+                            {% endif %}
+
+                        {% endfor %}
+
+                        <span>
+                            {{ review.rating }}.0
+                        </span>
+
+                    </div>
+
+
+                    <small>
+                        📍 {{ review.destination.name }}
+                    </small>
+
+                    <small>
+                        📅 {{ review.created_at|date:"F Y" }}
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="review-content">
+
+                <h3>
+                    {{ review.title }}
+                </h3>
+
+                <p>
+                    {{ review.review_text }}
+                </p>
+
+
+                <div class="tags">
+
+                    <span>
+                        {{ review.get_travel_type_display }}
+                    </span>
+
+                    <span>
+                        Verified Traveler
+                    </span>
+
+                </div>
+
+            </div>
+
+
+        </article>
+
+
+        {% empty %}
+
+        <div class="empty-review">
+
+            <h3>
+                No reviews found
+            </h3>
+
+            <p>
+                Be the first to share your experience!
+            </p>
+
+            <a href="{% url 'reviews:add_review' %}">
+                Write a Review
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</main>
+
+
+</body>
+
+</html>

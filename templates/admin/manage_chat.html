@@ -1,0 +1,385 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Explore India | AI Chat Support</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/chat_support.css' %}">
+</head>
+
+<body>
+
+<div class="chat-container">
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="chat-header">
+
+        <div class="bot-avatar">
+            🤖
+        </div>
+
+        <div class="bot-info">
+
+            <h2>
+                Explore India AI Assistant
+            </h2>
+
+            <span>
+                <i></i> Online
+            </span>
+
+        </div>
+
+        <button class="close-btn"
+                onclick="closeChat()">
+            ×
+        </button>
+
+    </div>
+
+
+    <!-- ================= CHAT BODY ================= -->
+
+    <div class="chat-body"
+         id="chatBody">
+
+        <!-- Initial AI Message -->
+
+        <div class="message ai-message">
+
+            <div class="message-avatar">
+                🤖
+            </div>
+
+            <div class="message-content">
+
+                <p>
+                    Hello! 👋
+                </p>
+
+                <p>
+                    I'm your Explore India AI
+                    Travel Assistant.
+                </p>
+
+                <p>
+                    How can I help you plan
+                    your journey?
+                </p>
+
+                <span class="time">
+                    Now
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= QUICK QUESTIONS ================= -->
+
+    <div class="quick-questions">
+
+        <p>
+            Quick questions
+        </p>
+
+        <div class="quick-buttons">
+
+            <button onclick="sendQuickMessage(
+                'Suggest some tourist places in India'
+            )">
+                📍 Places to Visit
+            </button>
+
+            <button onclick="sendQuickMessage(
+                'Create a trip plan for Goa'
+            )">
+                🗺️ Trip Plan
+            </button>
+
+            <button onclick="sendQuickMessage(
+                'Suggest the best beaches in India'
+            )">
+                🏖️ Best Beaches
+            </button>
+
+            <button onclick="sendQuickMessage(
+                'What is the best time to visit Kerala?'
+            )">
+                🌤️ Best Time
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= INPUT ================= -->
+
+    <div class="input-area">
+
+        <input
+            type="text"
+            id="chatInput"
+            placeholder="Ask me about India tourism..."
+            autocomplete="off"
+        >
+
+        <button onclick="sendMessage()"
+                id="sendButton">
+
+            ➤
+
+        </button>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="chat-footer">
+
+        <span>
+            🤖 Powered by AI
+        </span>
+
+        <span>
+            🔒 Privacy Protected
+        </span>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const API_URL = "{% url 'chat_support:send_message' %}";
+
+const USER_ID = "{{ request.user.id }}";
+
+
+/* =========================
+   ADD MESSAGE
+========================= */
+
+function addMessage(message, type) {
+
+    const chatBody =
+        document.getElementById("chatBody");
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "message " + type + "-message";
+
+
+    const avatar =
+        document.createElement("div");
+
+    avatar.className =
+        "message-avatar";
+
+    avatar.textContent =
+        type === "ai" ? "🤖" : "👤";
+
+
+    const content =
+        document.createElement("div");
+
+    content.className =
+        "message-content";
+
+
+    const text =
+        document.createElement("p");
+
+    text.textContent =
+        message;
+
+
+    const time =
+        document.createElement("span");
+
+    time.className =
+        "time";
+
+    time.textContent =
+        "Now";
+
+
+    content.appendChild(text);
+
+    content.appendChild(time);
+
+    wrapper.appendChild(avatar);
+
+    wrapper.appendChild(content);
+
+    chatBody.appendChild(wrapper);
+
+
+    chatBody.scrollTop =
+        chatBody.scrollHeight;
+}
+
+
+/* =========================
+   SEND MESSAGE
+========================= */
+
+async function sendMessage() {
+
+    const input =
+        document.getElementById("chatInput");
+
+    const sendButton =
+        document.getElementById("sendButton");
+
+    const message =
+        input.value.trim();
+
+
+    if (!message) {
+        return;
+    }
+
+
+    // Show user message
+
+    addMessage(
+        message,
+        "user"
+    );
+
+
+    input.value = "";
+
+    sendButton.disabled = true;
+
+    sendButton.textContent = "...";
+
+
+    try {
+
+        const response =
+            await fetch(API_URL, {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    user_id: USER_ID,
+
+                    message: message
+
+                })
+
+            });
+
+
+        const data =
+            await response.json();
+
+
+        if (data.status === "success") {
+
+            addMessage(
+                data.ai_reply,
+                "ai"
+            );
+
+        } else {
+
+            addMessage(
+                data.message ||
+                "Sorry, something went wrong.",
+                "ai"
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        addMessage(
+            "Sorry, I couldn't connect to the AI assistant.",
+            "ai"
+        );
+
+    }
+
+
+    sendButton.disabled = false;
+
+    sendButton.textContent = "➤";
+}
+
+
+/* =========================
+   QUICK MESSAGE
+========================= */
+
+function sendQuickMessage(message) {
+
+    document.getElementById("chatInput").value =
+        message;
+
+    sendMessage();
+}
+
+
+/* =========================
+   ENTER KEY
+========================= */
+
+document
+    .getElementById("chatInput")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Enter") {
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+/* =========================
+   CLOSE
+========================= */
+
+function closeChat() {
+
+    window.history.back();
+
+}
+
+</script>
+
+</body>
+</html>

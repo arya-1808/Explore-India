@@ -1,0 +1,728 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f7f7f5;
+    color: #222;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    height: 78px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    border-bottom: 1px solid #eee;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.logo span {
+    font-size: 26px;
+    margin-right: 6px;
+}
+
+.logo b {
+    color: #f47c12;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.navbar nav a {
+    text-decoration: none;
+    color: #222;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.navbar nav a:hover {
+    color: #f47c12;
+}
+
+.navbar nav a.active {
+    color: #f47c12;
+    font-weight: 600;
+    border-bottom: 2px solid #f47c12;
+    padding-bottom: 7px;
+}
+
+.profile-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #f2f2f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 235px;
+
+    background:
+        linear-gradient(
+            rgba(0, 0, 0, 0.55),
+            rgba(0, 0, 0, 0.30)
+        ),
+        url("https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 35px 5%;
+    color: #fff;
+}
+
+.hero-content h1 {
+    font-size: 38px;
+    margin-bottom: 6px;
+}
+
+.hero-content h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================
+   SHARE CARD
+========================= */
+
+.share-card {
+    width: 320px;
+    background: #fff;
+    color: #222;
+
+    padding: 25px 28px;
+
+    border-radius: 17px;
+
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+}
+
+.share-card h2 {
+    font-size: 19px;
+    margin-bottom: 6px;
+}
+
+.share-card p {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 17px;
+}
+
+.write-btn {
+    display: block;
+    text-align: center;
+
+    padding: 11px;
+
+    border: 1px solid #f47c12;
+    border-radius: 8px;
+
+    color: #f47c12;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition: 0.2s;
+}
+
+.write-btn:hover {
+    background: #f47c12;
+    color: #fff;
+}
+
+
+/* =========================
+   SUMMARY
+========================= */
+
+.summary {
+    margin: 18px 5%;
+
+    background: #fff;
+
+    border-radius: 17px;
+
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.07);
+
+    display: grid;
+
+    grid-template-columns: 220px 330px 1fr;
+
+    min-height: 155px;
+
+    padding: 25px 30px;
+
+    gap: 25px;
+}
+
+
+/* =========================
+   OVERALL RATING
+========================= */
+
+.overall-rating {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    border-right: 1px solid #eee;
+}
+
+.overall-rating h1 {
+    font-size: 45px;
+    color: #f47c12;
+}
+
+.stars {
+    color: #f47c12;
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+
+.overall-rating strong {
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.overall-rating small {
+    color: #777;
+    font-size: 10px;
+}
+
+
+/* =========================
+   RATING BARS
+========================= */
+
+.rating-bars {
+    padding: 5px 20px;
+
+    border-right: 1px solid #eee;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.rating-row {
+    display: grid;
+
+    grid-template-columns: 55px 1fr 25px;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 5px 0;
+
+    font-size: 10px;
+}
+
+.bar {
+    height: 8px;
+
+    background: #eee;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+
+    background: #f47c12;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   TRUST SECTION
+========================= */
+
+.trust-section {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-around;
+
+    gap: 15px;
+}
+
+.trust-item {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+}
+
+.trust-item > span {
+    font-size: 22px;
+}
+
+.trust-item strong {
+    display: block;
+
+    font-size: 11px;
+}
+
+.trust-item small {
+    display: block;
+
+    color: #777;
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+    margin-top: 3px;
+}
+
+
+/* =========================
+   REVIEWS SECTION
+========================= */
+
+.reviews-section {
+    display: grid;
+
+    grid-template-columns: 230px 1fr;
+
+    gap: 15px;
+
+    margin: 18px 5% 60px;
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+.filter-card {
+    background: #fff;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    height: max-content;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.filter-card h2 {
+    font-size: 17px;
+
+    margin-bottom: 20px;
+}
+
+.filter-card label {
+    display: block;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    margin: 15px 0 7px;
+}
+
+.filter-card select {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 1px solid #ddd;
+
+    border-radius: 7px;
+
+    background: #fff;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 11px;
+
+    outline: none;
+}
+
+.filter-card select:focus {
+    border-color: #f47c12;
+}
+
+.filter-btn {
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 11px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #f47c12;
+
+    color: #fff;
+
+    font-family: 'Poppins', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: #df6907;
+}
+
+
+/* =========================
+   REVIEW LIST
+========================= */
+
+.review-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================
+   REVIEW CARD
+========================= */
+
+.review-card {
+    background: #fff;
+
+    border-radius: 16px;
+
+    padding: 18px 20px;
+
+    display: grid;
+
+    grid-template-columns: 260px 1fr;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================
+   REVIEW USER
+========================= */
+
+.review-user {
+    display: flex;
+
+    gap: 12px;
+
+    border-right: 1px solid #eee;
+
+    padding-right: 20px;
+}
+
+.avatar {
+    min-width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: #f1f1f1;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    color: #555;
+}
+
+.review-user h3 {
+    font-size: 13px;
+
+    margin-bottom: 2px;
+}
+
+.review-user small {
+    display: block;
+
+    color: #777;
+
+    font-size: 9px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================
+   REVIEW STARS
+========================= */
+
+.review-stars {
+    color: #f47c12;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+
+    margin: 4px 0;
+}
+
+.review-stars span {
+    color: #333;
+
+    font-size: 10px;
+
+    letter-spacing: 0;
+
+    margin-left: 3px;
+}
+
+
+/* =========================
+   REVIEW CONTENT
+========================= */
+
+.review-content {
+    padding-left: 20px;
+}
+
+.review-content h3 {
+    font-size: 15px;
+
+    margin-bottom: 8px;
+}
+
+.review-content p {
+    font-size: 11px;
+
+    color: #555;
+
+    line-height: 1.7;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================
+   TAGS
+========================= */
+
+.tags span {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    background: #edf7ef;
+
+    color: #3c6945;
+
+    border-radius: 6px;
+
+    font-size: 9px;
+
+    margin-right: 6px;
+}
+
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-review {
+    background: #fff;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    padding: 50px 20px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.empty-review h3 {
+    margin-bottom: 8px;
+}
+
+.empty-review p {
+    color: #777;
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+}
+
+.empty-review a {
+    display: inline-block;
+
+    background: #f47c12;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    padding: 10px 20px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .summary {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .overall-rating {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+    }
+
+    .rating-bars {
+        border-right: none;
+    }
+
+    .trust-section {
+        grid-column: 1 / -1;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .navbar {
+        height: auto;
+
+        padding: 15px;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .navbar nav {
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        gap: 15px;
+    }
+
+    .hero {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 25px;
+    }
+
+    .share-card {
+        width: 100%;
+    }
+
+    .summary {
+        margin: 15px;
+
+        grid-template-columns: 1fr;
+    }
+
+    .reviews-section {
+        grid-template-columns: 1fr;
+
+        margin: 15px;
+    }
+
+    .review-card {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .review-user {
+        border-right: none;
+
+        border-bottom: 1px solid #eee;
+
+        padding-right: 0;
+
+        padding-bottom: 15px;
+    }
+
+    .review-content {
+        padding-left: 0;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .hero-content h1 {
+        font-size: 30px;
+    }
+
+    .hero-content h3 {
+        font-size: 14px;
+    }
+
+    .trust-section {
+        flex-direction: column;
+
+        align-items: flex-start;
+    }
+}

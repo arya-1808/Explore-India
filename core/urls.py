@@ -13,7 +13,9 @@ urlpatterns = [
     path('reviews/', include('reviews.urls')),
     path('enquiries/', include('enquiries.urls')),
     path('dashboard/', include('dashboard.urls')),
-    path('trips/', include('trips.urls')),
+    path('chat/', include('chat_support.urls')),
+    path('trip/', include('trips.urls')),
+    
 ]
 
 if settings.DEBUG:

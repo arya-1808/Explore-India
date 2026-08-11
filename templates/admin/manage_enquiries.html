@@ -58,7 +58,7 @@
                 Destinations
             </a>
 
-            <a href="/trip-planner/">
+            <a href="/trip/">
                 Trip Planner
             </a>
 
@@ -66,14 +66,28 @@
                 Enquiry
             </a>
 
-            <a href="/contact/">
-                Contact
-            </a>
+           
 
         </nav>
 
     </header>
 
+<!-- ================= SUCCESS MESSAGE ================= -->
+
+{% if messages %}
+
+    {% for message in messages %}
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+
+        </div>
+
+    {% endfor %}
+
+{% endif %}
 
     <!-- ================= ENQUIRY SECTION ================= -->
 

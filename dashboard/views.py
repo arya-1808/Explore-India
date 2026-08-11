@@ -2,8 +2,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render
 from destinations.models import Destination
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.admin.views.decorators import staff_member_required
 
-
+@staff_member_required
 def dashboard(request):
     #search functionality for recent destinations
     search = request.GET.get("search")

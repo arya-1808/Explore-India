@@ -1,0 +1,279 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore India | Add Review</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css//review/add_reviews.css' %}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar">
+
+    <div class="logo">
+        <span>🌍</span>
+        Explore <b>India</b>
+    </div>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Destinations</a>
+        <a href="#">Trip Planner</a>
+        <a href="#">Enquiry</a>
+
+        <a href="{% url 'reviews:user_reviews' %}"
+           class="active">
+            Reviews
+        </a>
+
+        <a href="#">Contact</a>
+
+        <span class="profile-icon">👤</span>
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     PAGE
+========================= -->
+
+<main class="review-page">
+
+    <div class="review-card">
+
+        <!-- HEADER -->
+
+        <div class="review-header">
+
+            <div class="back-button">
+                <a href="{% url 'reviews:user_reviews' %}">
+                    ←
+                </a>
+            </div>
+
+            <div>
+                <h1>
+                    Share Your Experience
+                </h1>
+
+                <p>
+                    Your experience can help other travelers
+                    discover amazing places in India.
+                </p>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FORM
+        ========================= -->
+
+        <form method="POST"
+              action="{% url 'reviews:add_review' %}">
+
+            {% csrf_token %}
+
+
+            <!-- DESTINATION -->
+
+            <div class="form-group">
+
+                <label>
+                    Destination
+                    <span>*</span>
+                </label>
+
+                <select name="destination"
+                        required>
+
+                    <option value="">
+                        Select a destination
+                    </option>
+
+                    {% for destination in destinations %}
+
+                    <option value="{{ destination.id }}">
+                        {{ destination.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+
+            <!-- RATING -->
+
+            <div class="form-group">
+
+                <label>
+                    Your Rating
+                    <span>*</span>
+                </label>
+
+                <div class="rating-input">
+
+                    <input type="radio"
+                           name="rating"
+                           id="star5"
+                           value="5"
+                           required>
+
+                    <label for="star5">★</label>
+
+
+                    <input type="radio"
+                           name="rating"
+                           id="star4"
+                           value="4">
+
+                    <label for="star4">★</label>
+
+
+                    <input type="radio"
+                           name="rating"
+                           id="star3"
+                           value="3">
+
+                    <label for="star3">★</label>
+
+
+                    <input type="radio"
+                           name="rating"
+                           id="star2"
+                           value="2">
+
+                    <label for="star2">★</label>
+
+
+                    <input type="radio"
+                           name="rating"
+                           id="star1"
+                           value="1">
+
+                    <label for="star1">★</label>
+
+                </div>
+
+                <small>
+                    Select your overall experience
+                </small>
+
+            </div>
+
+
+
+            <!-- TITLE -->
+
+            <div class="form-group">
+
+                <label>
+                    Review Title
+                    <span>*</span>
+                </label>
+
+                <input type="text"
+                       name="title"
+                       placeholder="Give your review a title"
+                       maxlength="200"
+                       required>
+
+            </div>
+
+
+
+            <!-- REVIEW -->
+
+            <div class="form-group">
+
+                <label>
+                    Your Review
+                    <span>*</span>
+                </label>
+
+                <textarea
+                    name="review_text"
+                    rows="6"
+                    placeholder="Tell us about your travel experience..."
+                    required></textarea>
+
+            </div>
+
+
+
+            <!-- TRAVEL TYPE -->
+
+            <div class="form-group">
+
+                <label>
+                    Travel Type
+                    <span>*</span>
+                </label>
+
+                <select name="travel_type"
+                        required>
+
+                    <option value="">
+                        Select travel type
+                    </option>
+
+                    {% for value, label in travel_types %}
+
+                    <option value="{{ value }}">
+                        {{ label }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+
+            <!-- BUTTONS -->
+
+            <div class="form-actions">
+
+                <a href="{% url 'reviews:user_reviews' %}"
+                   class="cancel-btn">
+
+                    Cancel
+
+                </a>
+
+                <button type="submit"
+                        class="submit-btn">
+
+                    Submit Review
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</main>
+
+</body>
+</html>
